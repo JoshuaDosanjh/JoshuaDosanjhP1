@@ -17,7 +17,135 @@
 </head>
 
 <body>
+    <nav>
+        <select id="Countries">
+            <option value="BS">Bahamas</option>
+            <option value="CA">Canada</option>
+            <option value="CR">Costa Rica</option>
+            <option value="CU">Cuba</option>
+            <option value="GL">Greenland</option>
+            <option value="GT">Guatemala</option>
+            <option value="DO">Dominican Rep</option>
+            <option value="HT">Haiti</option>
+            <option value="MX">Mexico</option>
+            <option value="NI">Nicaragua</option>
+            <option value="BZ">Belize</option>
+            <option value="PR">Puerto Rico</option>
+            <option value="SV">El Salvador</option>
+            <option value="TT">Trinidad and Tobago</option>
+            <option value="US">United States</option>
+            <option value="HN">Honduras</option>
+            <option value="BO">Bolivia</option>
+            <option value="BR">Brazil</option>
+            <option value="CL">Chile</option>
+            <option value="PA">Panama</option>
+            <option value="EC">Ecuador</option>
+            <option value="GY">Guyana</option>
+            <option value="PY">Paraguay</option>
+            <option value="SR">Suriname</option>
+            <option value="UY">Uruguay</option>
+            <option value="JM">Jamaica</option>
+            <option value="VE">Venezuela</option>
+            <option value="AF">Afghanistan</option>
+            <option value="AE">United Arab Emirates</option>
+            <option value="AZ">Azerbaijan</option>
+            <option value="BN">Brunei</option>
+            <option value="-99">N. Cyprus</option>
+            <option value="CY">Cyprus</option>
+            <option value="CO">Colombia</option>
+            <option value="FK">Falkland Is.</option>
+            <option value="AR">Argentina</option>
+            <option value="GE">Georgia</option>
+            <option value="ID">Indonesia</option>
+            <option value="AM">Armenia</option>
+            <option value="IQ">Iraq</option>
+            <option value="PE">Peru</option>
+            <option value="IL">Israel</option>
+            <option value="BD">Bangladesh</option>
+            <option value="CN">China</option>
+            <option value="JO">Jordan</option>
+            <option value="BT">Bhutan</option>
+            <option value="KZ">Kazakhstan</option>
+            <option value="KG">Kyrgyzstan</option>
+            <option value="KH">Cambodia</option>
+            <option value="KR">Korea</option>
+            <option value="LB">Lebanon</option>
+            <option value="LK">Sri Lanka</option>
+            <option value="MN">Mongolia</option>
+            <option value="NP">Nepal</option>
+            <option value="OM">Oman</option>
+            <option value="PK">Pakistan</option>
+            <option value="IR">Iran</option>
+            <option value="KP">Dem. Rep. Korea</option>
+            <option value="IN">India</option>
+            <option value="QA">Qatar</option>
+            <option value="SA">Saudi Arabia</option>
+            <option value="SY">Syria</option>
+            <option value="KW">Kuwait</option>
+            <option value="TJ">Tajikistan</option>
+            <option value="LA">Lao PDR</option>
+            <option value="JP">Japan</option>
+            <option value="MM">Myanmar</option>
+            <option value="TM">Turkmenistan</option>
+            <option value="MY">Malaysia</option>
+            <option value="TL">Timor-Leste</option>
+            <option value="PH">Philippines</option>
+            <option value="TW">Taiwan</option>
+            <option value="UZ">Uzbekistan</option>
+            <option value="PS">Palestine</option>
+            <option value="YE">Yemen</option>
+            <option value="BI">Burundi</option>
+            <option value="BJ">Benin</option>
+            <option value="BW">Botswana</option>
+            <option value="CF">Central African Rep.</option>
+        </select>
+        <button id="Sub">Submit</button>
+    </nav>
 
+    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#countryInfo">
+        Country Info
+    </button>
+
+    <div class="modal fade" id="countryInfo" tabindex="-1" aria-labelledby="countryInfoLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="countryInfoLabel">Modal title</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <h3>Country name</h3>
+                    <p id="Name">
+                    </p>
+                    <h3>Population</h3>
+                    <p id="Pop">
+                    </p>
+                    <h3>Currency</h3>
+                    <p id="Cur">
+                    </p>
+                    <h3>Current weather</h3>
+                    <p id="CW">
+                    </p>
+                    <h3>Wikipedia links</h3>
+                    <p id="WL">
+                    </p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="map"></div>
+
+    <script type="application/javascript" src="js/jquery-2.2.3.min.js"></script>
+    <script type="application/javascript" src="js/Leaflet.js"></script>
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
+            integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
+            crossorigin=""></script>
+    <script src="js/leaflet-providers.js"></script>
+    <script src="js/leaflet.extra-markers.min.js"></script>
 </body>
 
 </html>
