@@ -29,3 +29,32 @@ var latlngs = [
 
 var polyline = L.polyline(latlngs, { color: 'red' }).addTo(map);
 map.fitBounds(polyline.getBounds());
+
+$('#Sub').click(function () {
+
+	$.ajax({
+		url: "CountryList.php",
+		type: 'POST',
+		dataType: 'json',
+		data: {
+			countryBorders: $('#Countries').val()
+		},
+		success: function (result) {
+
+			console.log(JSON.stringify(result));
+
+			if (result.status.name == "ok") {
+
+				$('#Name').html(result['data'][0]['name']);
+				$('#Pop').html(result['data'][0]['population']);
+				$('#Cur').html(result['data'][0]['currency']);
+				$('#CW').html(result['data'][0]['weather']);
+				$('#WL').html(result['data'][0]['wiki_url']);
+
+			}
+
+		},
+
+	});
+
+});
