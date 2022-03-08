@@ -9,6 +9,17 @@ var OpenStreetMap_Mapnik = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{
 	attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
 }).addTo(map);
 
+function success(pos) {
+	var crd = pos.coords;
+
+	console.log('Your current position is:');
+	console.log(`Latitude : ${crd.latitude}`);
+	console.log(`Longitude: ${crd.longitude}`);
+	console.log(`More or less ${crd.accuracy} meters.`);
+}
+
+navigator.geolocation.getCurrentPosition(success);
+
 function onLocationFound(e) {
 	var radius = e.accuracy;
 
