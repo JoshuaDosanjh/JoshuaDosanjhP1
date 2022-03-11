@@ -20,18 +20,22 @@ function success(pos) {
 
 navigator.geolocation.getCurrentPosition(success);
 
-function onLocationFound(e) {
+function onLocationFound() {
 
 	$.ajax({
 		url: "OpenCage.php",
 		type: 'POST',
 		dataType: 'json',
 		data: {
-			countryLanLng: $(e).val()
+			countryCode: $('#Countries').val()
 		},
 		success: function (result) {
 
 			console.log(JSON.stringify(result));
+
+			select.addEventListener('change', function () {
+				name.textContent = this.value;
+			});
 
 		},
 
@@ -45,3 +49,4 @@ var latlngs = [
 
 var polyline = L.polyline(latlngs, { color: 'red' }).addTo(map);
 map.fitBounds(polyline.getBounds());
+
