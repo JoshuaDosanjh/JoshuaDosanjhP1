@@ -20,11 +20,22 @@ function success(pos) {
 
 navigator.geolocation.getCurrentPosition(success);
 
-function onLocationFound() {
+function onLocationFound(e) {
 
-	var latlngs = [
-		$("locate")["coordinates"]
-	];
+	$.ajax({
+		url: "OpenCage.php",
+		type: 'POST',
+		dataType: 'json',
+		data: {
+			countryLanLng: $(e).val()
+		},
+		success: function (result) {
+
+			console.log(JSON.stringify(result));
+
+		},
+
+	}); 
 
 };
 
