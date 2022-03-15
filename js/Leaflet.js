@@ -17,29 +17,32 @@ function success(pos) {
 	console.log(`Longitude: ${crd.longitude}`);
 	console.log(`More or less ${crd.accuracy} meters.`);
 
-	$.ajax({
-		url: "OpenCage.php",
-		type: 'POST',
-		dataType: 'json',
-		data: {
-			countryCode: $('#Countries').val()
-		},
-		success: function (result) {
-
-			console.log(JSON.stringify(result));
-
-			$('#Countries').change(function () {
-				if ($(this).val() == '1') {
-					$('#1').$('ISO_2');
-				}
-
-			},
-
-	});
-
 };
 
 navigator.geolocation.getCurrentPosition(success);
+
+if (navigator.geolocation) {
+	navigator.geolocation.getCurrentPosition(function (position) {
+		$.ajax({
+			url: "OpenCage.php",
+			type: 'POST',
+			dataType: 'json',
+			data: {
+				x: position.coords.latitude,
+				y: position.coords.longitude
+			},
+			success: function displayVals() {
+				var Country = $("#Countries").val("ISO_2");
+				$("#1").html(Country)
+				}
+			})
+		})
+	})
+};
+
+
+$("select").change(displayVals);
+displayVals();
 
 (function onLocationFound() {
 
