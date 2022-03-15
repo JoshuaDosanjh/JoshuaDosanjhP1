@@ -23,26 +23,23 @@ navigator.geolocation.getCurrentPosition(success);
 
 if (navigator.geolocation) {
 	navigator.geolocation.getCurrentPosition(function (position) {
-		$.ajax({
-			url: "OpenCage.php",
-			type: 'POST',
-			dataType: 'json',
-			data: {
-				x: position.coords.latitude,
-				y: position.coords.longitude
-			},
-			success: function displayVals() {
-				var Country = $("#Countries").val("ISO_2");
-				$("#1").html(Country)
+		function FetchCord(id) {
+			$.ajax({
+				url: "OpenCage.php",
+				type: 'POST',
+				dataType: 'json',
+				data: {
+					x: position.coords.latitude,
+					y: position.coords.longitude
+				},
+				success: function (data) {
+					$("#Countries").html(data);
 				}
 			})
-		})
+		}
 	})
 };
 
-
-$("select").change(displayVals);
-displayVals();
 
 (function onLocationFound() {
 
