@@ -23,7 +23,6 @@ navigator.geolocation.getCurrentPosition(success);
 
 if (navigator.geolocation) {
 	navigator.geolocation.getCurrentPosition(function (position) {
-		function FetchCord(id) {
 			$.ajax({
 				url: "OpenCage.php",
 				type: 'POST',
@@ -32,11 +31,15 @@ if (navigator.geolocation) {
 					x: position.coords.latitude,
 					y: position.coords.longitude
 				},
-				success: function (data) {
-					$("#Countries").html(data);
+				success: function (result) {
+
+					console.log(JSON.stringify(result));
+
+					$("#Countries").val(function (c, val) {
+							return val.trigger("change");
+						});
 				}
 			})
-		}
 	})
 };
 
@@ -68,6 +71,4 @@ var latlngs = [
 	$("polyboard")["coordinates"]
 ];
 
-var polyline = L.polyline(latlngs, { color: 'red' }).addTo(map);
-map.fitBounds(polyline.getBounds());
 
