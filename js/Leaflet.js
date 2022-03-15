@@ -24,7 +24,7 @@ navigator.geolocation.getCurrentPosition(success);
 if (navigator.geolocation) {
 	navigator.geolocation.getCurrentPosition(function (position) {
 			$.ajax({
-				url: "OpenCage.php",
+				url: "php/OpenCage.php",
 				type: 'POST',
 				dataType: 'json',
 				data: {
@@ -47,7 +47,7 @@ if (navigator.geolocation) {
 (function onLocationFound() {
 
 	$.ajax({
-		url: "OpenCage.php",
+		url: "php/OpenCage.php",
 		type: 'POST',
 		dataType: 'json',
 		data: {
