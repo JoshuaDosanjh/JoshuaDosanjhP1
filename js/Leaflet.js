@@ -21,26 +21,26 @@ function success(pos) {
 
 navigator.geolocation.getCurrentPosition(success);
 
-if (navigator.geolocation) {
-	navigator.geolocation.getCurrentPosition(function (position) {
+function getCurrentPosition() {
 			$.ajax({
 				url: "php/OpenCage.php",
 				type: 'POST',
 				dataType: 'json',
 				data: {
-					x: position.coords.latitude,
-					y: position.coords.longitude
+					'LAT': pos.coords.latitude,
+					'LNG': pos.coords.longitude
 				},
 				success: function (result) {
 
 					console.log(JSON.stringify(result));
 
-					$("#Countries").val(function (c, val) {
-							return val.trigger("change");
-						});
+					if (result.status.name == "ok") {
+
+						$('#Countries').html(result['data'][0]['country']);
+
+					}
 				}
 			})
-	})
 };
 
 
