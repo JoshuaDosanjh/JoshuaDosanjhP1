@@ -21,7 +21,7 @@ function success(pos) {
 
 navigator.geolocation.getCurrentPosition(success);
 
-function getCurrentPosition() {
+$('#Countries').load(function() {
 			$.ajax({
 				url: "php/OpenCage.php",
 				type: 'POST',
@@ -36,12 +36,12 @@ function getCurrentPosition() {
 
 					if (result.status.name == "ok") {
 
-						$('#Countries').html(result['data'][0]['country']);
+						$('#1').html(result['data'][0]['country']);
 
 					}
 				}
 			})
-};
+});
 
 
 (function onLocationFound() {
