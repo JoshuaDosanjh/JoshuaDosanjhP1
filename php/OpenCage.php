@@ -5,7 +5,7 @@
 
 	$executionStartTime = microtime(true);
 
-	$result = 'https://api.opencagedata.com/geocode/v1/json?q=' . $_REQUEST['LAT+LNG'] . '&key=ba87d21a5b1749b4a81b796ba382f8d3';
+	$result = 'https://api.opencagedata.com/geocode/v1/json?q=' . $_REQUEST['LAT'] . "," . $_REQUEST['LNG'] . '&key=ba87d21a5b1749b4a81b796ba382f8d3';
 	
 	$ch = curl_init();
 	curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
@@ -26,7 +26,7 @@
 
 	$locate = []
 
-    foreach($decoded_object['geometry'] as $lnglat){
+    foreach($decoded_object["components"] as $lnglat){
 
         array_push(
 
@@ -34,7 +34,7 @@
 
             array(
 
-                "coordinates"=> $lnglat["coordinates"],
+                "country"=> $lnglat["country"],
 
             )
 
