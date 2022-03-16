@@ -37,7 +37,7 @@ $('#Countries').load(function() {
 					if (result.status.name == "ok") {
 
 						$('#1').change(function () {
-							select.val("locate"["country_code"]);
+							$("#Countries").val("locate"["country_code"]);
 						});
 					}
 				}
