@@ -61,7 +61,7 @@ function success(pos) {
 		},
 		success: function (result) {
 			if (result.status.name == "ok") {
-				$('#CW').html(result.data.results[0].weather['description']);
+				$('#CW').html(result.data[0].weather['description']);
 			}
 		},
 	})
