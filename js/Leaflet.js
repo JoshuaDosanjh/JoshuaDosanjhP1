@@ -41,7 +41,7 @@ $.ajax({
 	}
 })
 
-$('#Countries').change(function () {
+$('#Countries').trigger("change", function success(pos) {
 
 	$.ajax({
 		url: "php/OpenCage.php",
@@ -60,7 +60,7 @@ $('#Countries').change(function () {
 
 });
 
-$('#Countries').change(function () {
+$('#Countries').trigger("change", function () {
 
 	$.ajax({
 		url: "php/CountryAPI.php",
@@ -72,31 +72,15 @@ $('#Countries').change(function () {
 		success: function (result) {
 			if (result.status.name == "ok") {
 				$('#Pop').html(result.data.results[0]["population"]);
-			}
-		},
-	})
-
-});
-
-$('#Countries').change(function () {
-
-	$.ajax({
-		url: "php/CountryAPI.php",
-		type: 'POST',
-		dataType: 'json',
-		data: {
-			'Ccode': $('#Countries').val()
-		},
-		success: function (result) {
-			if (result.status.name == "ok") {
 				$('#Cur').html(result.data.results[0].currency['name']);
+				$('#WL').html(result.data.results[0]['wiki_url']);
 			}
 		},
 	})
 
 });
 
-$('#Countries').change(function () {
+$('#Countries').trigger("change", function success(pos) {
 
 	$.ajax({
 		url: "php/Weather.php",
@@ -109,24 +93,6 @@ $('#Countries').change(function () {
 		success: function (result) {
 			if (result.status.name == "ok") {
 				$('#CW').html(result.data.results[0].weather['description']);
-			}
-		},
-	})
-
-});
-
-$('#Countries').change(function () {
-
-	$.ajax({
-		url: "php/CountryAPI.php",
-		type: 'POST',
-		dataType: 'json',
-		data: {
-			'Ccode': $('#Countries').val()
-		},
-		success: function (result) {
-			if (result.status.name == "ok") {
-				$('#WL').html(result.data.results[0]['wiki_url']);
 			}
 		},
 	})
