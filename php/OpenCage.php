@@ -5,7 +5,7 @@
 
 	$executionStartTime = microtime(true);
 
-	$result = 'https://api.opencagedata.com/geocode/v1/json?q=' . $_REQUEST['LAT'] . "," . $_REQUEST['LNG'] . '&key=ba87d21a5b1749b4a81b796ba382f8d3';
+	$url = 'https://api.opencagedata.com/geocode/v1/json?q=' . $_REQUEST['LAT'] . ',' . $_REQUEST['LNG'] . '&key=ba87d21a5b1749b4a81b796ba382f8d3';
 	
 	$ch = curl_init();
 	curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
@@ -22,23 +22,7 @@
 	$output['status']['name'] = "ok";
 	$output['status']['description'] = "success";
 	$output['status']['returnedIn'] = intval((microtime(true) - $executionStartTime) * 1000) . " ms";
-	$output['data'] = $decode['features'];
-
-	$locate = []
-
-    foreach($decoded_object["components"] as $lnglat){
-
-        array_push(
-
-            $locate,
-
-            array(
-
-                "country"=> $lnglat["country"],
-
-            )
-
-        );
+	$output['data'] = $decode;
 	
 	header('Content-Type: application/json; charset=UTF-8');
 
