@@ -10,61 +10,126 @@ var OpenStreetMap_Mapnik = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{
 }).addTo(map);
 
 function success(pos) {
-	var crd = pos.coords;
-
-	console.log('Your current position is:');
-	console.log(`Latitude : ${crd.latitude}`);
-	console.log(`Longitude: ${crd.longitude}`);
-	console.log(`More or less ${crd.accuracy} meters.`);
-
-};
-
-navigator.geolocation.getCurrentPosition(success);
-
-$('#Countries').load(function() {
-			$.ajax({
-				url: "php/OpenCage.php",
-				type: 'POST',
-				dataType: 'json',
-				data: {
-					'LAT': pos.coords.latitude,
-					'LNG': pos.coords.longitude
-				},
-				success: function (result) {
-
-					console.log(JSON.stringify(result));
-
-					if (result.status.name == "ok") {
-
-						$('#1').change(function () {
-							$("#Countries").val("locate"["country_code"]);
-						});
-					}
-				}
-			})
-});
-
-
-(function onLocationFound() {
 
 	$.ajax({
 		url: "php/OpenCage.php",
 		type: 'POST',
 		dataType: 'json',
 		data: {
-			countryCode: $('#Countries').val()
+			'LAT': pos.coords.latitude,
+			'LNG': pos.coords.longitude
 		},
 		success: function (result) {
-
-			console.log(JSON.stringify(result));
-
-			select.addEventListener('change', function () {
-				name.textContent = this.value;
-			});
-
+			if (result.status.name == "ok") {
+				$('#Countries').val(result.data.results[0].components['ISO_3166-1_alpha-2']);
+			}
 		},
+	})
 
-	}); 
+};
+
+navigator.geolocation.getCurrentPosition(success);
+
+$.ajax({
+	url: 'php/CountryList.php',
+	success: result => {
+		let html = ''
+		result.data.forEach(country => {
+			html += `<option value='${country.iso_a2}'>${country.name}</option>`
+		});
+		$('#Countries').html(html);
+	}
+})
+
+$('#Countries').change(function () {
+
+	$.ajax({
+		url: "php/OpenCage.php",
+		type: 'POST',
+		dataType: 'json',
+		data: {
+			'LAT': pos.coords.latitude,
+			'LNG': pos.coords.longitude
+		},
+		success: function (result) {
+			if (result.status.name == "ok") {
+				$('#Name').html(result.data.results[0].components['country']);
+			}
+		},
+	})
+
+});
+
+$('#Countries').change(function () {
+
+	$.ajax({
+		url: "php/CountryAPI.php",
+		type: 'POST',
+		dataType: 'json',
+		data: {
+			'Ccode': $('#Countries').val()
+		},
+		success: function (result) {
+			if (result.status.name == "ok") {
+				$('#Pop').html(result.data.results[0]["population"]);
+			}
+		},
+	})
+
+});
+
+$('#Countries').change(function () {
+
+	$.ajax({
+		url: "php/CountryAPI.php",
+		type: 'POST',
+		dataType: 'json',
+		data: {
+			'Ccode': $('#Countries').val()
+		},
+		success: function (result) {
+			if (result.status.name == "ok") {
+				$('#Cur').html(result.data.results[0].currency['name']);
+			}
+		},
+	})
+
+});
+
+$('#Countries').change(function () {
+
+	$.ajax({
+		url: "php/Weather.php",
+		type: 'POST',
+		dataType: 'json',
+		data: {
+			'LAT': pos.coords.latitude,
+			'LNG': pos.coords.longitude
+		},
+		success: function (result) {
+			if (result.status.name == "ok") {
+				$('#CW').html(result.data.results[0].weather['description']);
+			}
+		},
+	})
+
+});
+
+$('#Countries').change(function () {
+
+	$.ajax({
+		url: "php/CountryAPI.php",
+		type: 'POST',
+		dataType: 'json',
+		data: {
+			'Ccode': $('#Countries').val()
+		},
+		success: function (result) {
+			if (result.status.name == "ok") {
+				$('#WL').html(result.data.results[0]['wiki_url']);
+			}
+		},
+	})
 
 });
 
