@@ -21,57 +21,47 @@ function success(pos) {
 		},
 		success: function (result) {
 			if (result.status.name == "ok") {
-				$('#Countries').val(result.data.results[0].components['ISO_3166-1_alpha-2']), function() {
-					$('#Countries'.val().trigger("change", function () {
+				$('#Countries').val(result.data.results[0].components['ISO_3166-1_alpha-2']);
+				$('#Name').html(result.data.results[0].components['country']);
+			}
+		},
+	})
 
-						$.ajax({
-							url: "php/OpenCage.php",
-							type: 'POST',
-							dataType: 'json',
-							data: {
-								'LAT': pos.coords.latitude,
-								'LNG': pos.coords.longitude
-							},
-							success: function (result) {
-								if (result.status.name == "ok") {
-									$('#Name').html(result.data.results[0].components['country']);
-								}
-							},
-						})
+};
 
-						$.ajax({
-							url: "php/CountryAPI.php",
-							type: 'POST',
-							dataType: 'json',
-							data: {
-								'Ccode': $('#Countries').val()
-							},
-							success: function (result) {
-								if (result.status.name == "ok") {
-									$('#Pop').html(result.data.results[0]["population"]);
-									$('#Cur').html(result.data.results[0].currency['name']);
-									$('#WL').html(result.data.results[0]['wiki_url']);
-								}
-							},
-						})
+function success(pos) {
 
-						$.ajax({
-							url: "php/Weather.php",
-							type: 'POST',
-							dataType: 'json',
-							data: {
-								'LAT': pos.coords.latitude,
-								'LNG': pos.coords.longitude
-							},
-							success: function (result) {
-								if (result.status.name == "ok") {
-									$('#CW').html(result.data.results[0].weather['description']);
-								}
-							},
-						})
+	$.ajax({
+		url: "php/CountryAPI.php",
+		type: 'POST',
+		dataType: 'json',
+		data: {
+			'Ccode': $('#Countries').val()
+		},
+		success: function (result) {
+			if (result.status.name == "ok") {
+				$('#Pop').html(result.data.results[0]["population"]);
+				$('#Cur').html(result.data.results[0].currency['name']);
+				$('#WL').html(result.data.results[0]['wiki_url']);
+			}
+		},
+	})
 
-					}));
-				};
+};
+
+function success(pos) {
+
+	$.ajax({
+		url: "php/Weather.php",
+		type: 'POST',
+		dataType: 'json',
+		data: {
+			'LAT': pos.coords.latitude,
+			'LNG': pos.coords.longitude
+		},
+		success: function (result) {
+			if (result.status.name == "ok") {
+				$('#CW').html(result.data.results[0].weather['description']);
 			}
 		},
 	})
@@ -90,8 +80,6 @@ $.ajax({
 		$('#Countries').html(html);
 	}
 })
-
-
 
 var latlngs = [
 	$("polyboard")["coordinates"]
