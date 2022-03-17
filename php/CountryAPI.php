@@ -3,7 +3,7 @@
 	$curl = curl_init();
 
 curl_setopt_array($curl, [
-	CURLOPT_URL => "https://countries-cities.p.rapidapi.com/location/country/" . $_REQUEST['%7Bcode%7D'],
+	CURLOPT_URL => "https://countries-cities.p.rapidapi.com/location/country/" . $_REQUEST['Ccode'],
 	CURLOPT_RETURNTRANSFER => true,
 	CURLOPT_FOLLOWLOCATION => true,
 	CURLOPT_ENCODING => "",
