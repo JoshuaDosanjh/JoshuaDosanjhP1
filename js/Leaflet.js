@@ -29,6 +29,26 @@ function success(pos) {
 
 };
 
+$("Countries").change(function () {
+	$("Countries").trigger("change");
+	var p = navigator;
+	$.ajax({
+		url: "php/Weather.php",
+		type: 'POST',
+		dataType: 'json',
+		data: {
+			'LAT': p.coords.latitude,
+			'LNG': p.coords.longitude
+		},
+		success: function (result) {
+			if (result.status.name == "ok") {
+				$('#CW').html(result.data[0].weather['description']);
+			}
+		},
+	})
+});
+
+/*
 function success(pos) {
 
 	$.ajax({
@@ -67,7 +87,7 @@ function success(pos) {
 	})
 
 };
-
+*/
 navigator.geolocation.getCurrentPosition(success);
 
 $.ajax({
