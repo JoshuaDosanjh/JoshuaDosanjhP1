@@ -29,16 +29,14 @@ function success(pos) {
 
 };
 
-$("Countries").change(function () {
-	$("Countries").trigger("change");
-	var p = navigator;
+$("Countries").trigger("change", function () {
 	$.ajax({
 		url: "php/Weather.php",
 		type: 'POST',
 		dataType: 'json',
 		data: {
-			'LAT': p.coords.latitude,
-			'LNG': p.coords.longitude
+			'LAT': latitude,
+			'LNG': longitude
 		},
 		success: function (result) {
 			if (result.status.name == "ok") {
