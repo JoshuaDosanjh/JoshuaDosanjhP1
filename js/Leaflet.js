@@ -29,7 +29,7 @@ function success(pos) {
 
 };
 
-$("Countries").trigger("change", function () {
+function Func() {
 	$.ajax({
 		url: "php/Weather.php",
 		type: 'POST',
@@ -44,7 +44,7 @@ $("Countries").trigger("change", function () {
 			}
 		},
 	})
-});
+};
 
 /*
 function success(pos) {
