@@ -1,9 +1,14 @@
 <?php
 
+ini_set('display_errors', 'On');
+	error_reporting(E_ALL);
+
+	$executionStartTime = microtime(true);
+
 	$curl = curl_init();
 
 curl_setopt_array($curl, [
-	CURLOPT_URL => "https://countries-cities.p.rapidapi.com/location/country/" . $_REQUEST['Ccode'],
+	CURLOPT_URL => "https://countries-cities.p.rapidapi.com/location/country/" . $_REQUEST['Ccode'] . "?format=json",
 	CURLOPT_RETURNTRANSFER => true,
 	CURLOPT_FOLLOWLOCATION => true,
 	CURLOPT_ENCODING => "",
@@ -17,15 +22,23 @@ curl_setopt_array($curl, [
 	],
 ]);
 
-$response = curl_exec($curl);
+$result = curl_exec($curl);
 $err = curl_error($curl);
 
 curl_close($curl);
 
+$decode = json_decode($result,true);	
+
+	$output['status']['code'] = "200";
+	$output['status']['name'] = "ok";
+	$output['status']['description'] = "success";
+	$output['status']['returnedIn'] = intval((microtime(true) - $executionStartTime) * 1000) . " ms";
+	$output['data'] = $decode;
+
 if ($err) {
 	echo "cURL Error #:" . $err;
 } else {
-	echo $response;
+	json_encode($output);
 };
 
 ?>
