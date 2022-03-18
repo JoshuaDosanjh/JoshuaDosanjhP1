@@ -44,7 +44,8 @@ function success(pos) {
 		},
 	})
 */
-$('#Countries').val().change( function () {
+$('#Countries').change(function () {
+
 	$.ajax({
 		url: "php/CountryAPI.php",
 		type: 'POST',
