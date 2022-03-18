@@ -22,14 +22,13 @@ function success(pos) {
 		success: function (result) {
 			if (result.status.name == "ok") {
 				$('#Countries').val(result.data.results[0].components['ISO_3166-1_alpha-2']);
-				$('#Name').html(result.data.results[0].components['country']);
 			}
+			
 		},
 	})
 
 };
-
-function Func() {
+/*
 	$.ajax({
 		url: "php/Weather.php",
 		type: 'POST',
@@ -44,7 +43,24 @@ function Func() {
 			}
 		},
 	})
-};
+*/
+$('#Countries').val().change( function () {
+	$.ajax({
+		url: "php/CountryAPI.php",
+		type: 'POST',
+		dataType: 'json',
+		data: {
+			'Ccode': $('#Countries').val()
+		},
+		success: function (result) {
+			if (result.status.name == "ok") {
+				$('#Pop').html(result.data.results[0]["population"]);
+				$('#Cur').html(result.data.results[0].currency['name']);
+				$('#WL').html(result.data.results[0]['wiki_url']);
+			}
+		},
+	})
+});
 
 /*
 function success(pos) {
@@ -66,7 +82,7 @@ function success(pos) {
 	})
 
 };
-
+$('#Name').html(result.data.results[0].components['country']);
 function success(pos) {
 
 	$.ajax({
