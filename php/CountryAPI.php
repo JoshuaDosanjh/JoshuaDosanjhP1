@@ -8,7 +8,7 @@ ini_set('display_errors', 'On');
 	$curl = curl_init();
 
 curl_setopt_array($curl, [
-	CURLOPT_URL => "https://countries-cities.p.rapidapi.com/location/country/" . $_REQUEST['Ccode'] . "?format=json",
+	CURLOPT_URL => "https://countries-cities.p.rapidapi.com/location/country/" . $_REQUEST['Ccode'] . "?format=json"
 	CURLOPT_RETURNTRANSFER => true,
 	CURLOPT_FOLLOWLOCATION => true,
 	CURLOPT_ENCODING => "",
@@ -35,10 +35,8 @@ $decode = json_decode($result,true);
 	$output['status']['returnedIn'] = intval((microtime(true) - $executionStartTime) * 1000) . " ms";
 	$output['data'] = $decode;
 
-if ($err) {
-	echo "cURL Error #:" . $err;
-} else {
-	json_encode($output);
-};
+header('Content-Type: application/json; charset=UTF-8');
+
+echo json_encode($output);
 
 ?>
