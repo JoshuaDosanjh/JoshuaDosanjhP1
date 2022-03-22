@@ -59,8 +59,7 @@ $('#Countries').change(function () {
 				$('#WL').html(result.data.results[0]['wiki_url']);
 		},
 		error: function (xhr, status, error) {
-			var errorMessage = xhr.status
-			alert('Error - ' + errorMessage);
+			console.log(xhr.responseText);
 		}
 	})
 });
