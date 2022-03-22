@@ -8,7 +8,7 @@ ini_set('display_errors', 'On');
 	$curl = curl_init();
 
 curl_setopt_array($curl, [
-	CURLOPT_URL => "https://countries-cities.p.rapidapi.com/location/country/" . $_REQUEST['Ccode'] . "?format=json"
+	CURLOPT_URL => "https://countries-cities.p.rapidapi.com/location/country/" . $_REQUEST['Ccode'] . "?format=json",
 	CURLOPT_RETURNTRANSFER => true,
 	CURLOPT_FOLLOWLOCATION => true,
 	CURLOPT_ENCODING => "",
