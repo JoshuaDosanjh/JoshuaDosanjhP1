@@ -54,9 +54,9 @@ $('#Countries').change(function () {
 			'Ccode': $('#Countries').val()
 		},
 		success: function (result) {
-				$('#Pop').html(result.data.results[0]["population"]);
-				$('#Cur').html(result.data.results[0].currency['name']);
-				$('#WL').html(result.data.results[0]['wiki_url']);
+				$('#Pop').html(result['data'][0]["population"]);
+				$('#Cur').html(result['data'][0].currency['name']);
+				$('#WL').html(result['data'][0]['wiki_url']);
 		},
 		error: function (xhr, status, error) {
 			console.log(xhr.responseText);
