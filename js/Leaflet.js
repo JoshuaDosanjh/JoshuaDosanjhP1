@@ -44,6 +44,50 @@ function success(pos) {
 		},
 	})
 */
+
+$('#Countries').change(function () {
+
+	$.ajax({
+		url: "php/RestAPI.php",
+		type: 'POST',
+		dataType: 'json',
+		data: {
+			'code': $('#Countries').val()
+		},
+		success: function (result) {
+			var latitude = result['data'].latlng[0];
+			var longitude = result['data'].latlng[1];
+		},
+		error: function (xhr, status, error) {
+			console.log(xhr.responseText);
+		}
+	})
+});
+
+
+$('#Countries').change(function () {
+
+	$.ajax({
+		url: "php/OpenCage.php",
+		type: 'POST',
+		dataType: 'json',
+		data: {
+			'LAT': latitude,
+			'LNG': longitude
+		},
+		success: function (result) {
+			if (result.status.name == "ok") {
+				$('#Name').html(result.data.results[0].components['country']);
+			}
+
+		},
+		error: function (xhr, status, error) {
+			console.log(xhr.responseText);
+		}
+	})
+});
+
+
 $('#Countries').change(function () {
 
 	$.ajax({
@@ -105,6 +149,7 @@ function success(pos) {
 };
 */
 navigator.geolocation.getCurrentPosition(success);
+
 
 $.ajax({
 	url: 'php/CountryList.php',
