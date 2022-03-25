@@ -28,6 +28,9 @@ function success(pos) {
 	})
 
 };
+
+latlng();
+
 /*
 	$.ajax({
 		url: "php/Weather.php",
@@ -45,7 +48,7 @@ function success(pos) {
 	})
 */
 
-$('#Countries').change(function () {
+function latlng() {
 
 	$.ajax({
 		url: "php/RestAPI.php",
@@ -55,16 +58,16 @@ $('#Countries').change(function () {
 			'code': $('#Countries').val()
 		},
 		success: function (result) {
-			var latitude = result['data'].latlng[0];
-			var longitude = result['data'].latlng[1];
+			latitude = result['data'].latlng[0];
+			longitude = result['data'].latlng[1];
 		},
 		error: function (xhr, status, error) {
 			console.log(xhr.responseText);
 		}
 	})
-});
+};
 
-
+/*
 $('#Countries').change(function success(latitude, longitude) {
 
 	$.ajax({
@@ -86,7 +89,29 @@ $('#Countries').change(function success(latitude, longitude) {
 		}
 	})
 });
+*/
 
+$('#Countries').change(function latlng(latitude, longitude) {
+
+	$.ajax({
+		url: "php/OpenCage.php",
+		type: 'POST',
+		dataType: 'json',
+		data: {
+			'LAT': latitude,
+			'LNG': longitude
+		},
+		success: function (result) {
+			if (result.status.name == "ok") {
+				$('#Name').html(result.data.results[0].components['country']);
+			}
+
+		},
+		error: function (xhr, status, error) {
+			console.log(xhr.responseText);
+		}
+	})
+});
 
 $('#Countries').change(function () {
 
