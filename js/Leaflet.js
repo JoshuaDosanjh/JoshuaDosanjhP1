@@ -65,7 +65,7 @@ $('#Countries').change(function () {
 });
 
 
-$('#Countries').change(function () {
+$('#Countries').change(function success(latitude, longitude) {
 
 	$.ajax({
 		url: "php/OpenCage.php",
