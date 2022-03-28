@@ -1,8 +1,8 @@
 // var map = L.map('map').fitWorld()
 
-var map = L.map('map').setView([51.505, -0.09], 13);
+// var map = L.map('map').setView([51.505, -0.09], 13);
 
-// map.locate({ setView: true, maxZoom: 16 });
+var map = map.locate({ setView: true, maxZoom: 16 });
 
 var OpenStreetMap_Mapnik = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
 	maxZoom: 19,
