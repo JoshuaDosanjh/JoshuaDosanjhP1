@@ -1,8 +1,8 @@
 // var map = L.map('map').fitWorld()
 
-// var map = L.map('map').setView([51.505, -0.09], 13);
+ var map = L.map('map').setView([0, 0], 13);
 
-var map = map.locate({ setView: true, maxZoom: 16 });
+// map.locate({ setView: true, maxZoom: 16 });
 
 var OpenStreetMap_Mapnik = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
 	maxZoom: 19,
@@ -27,6 +27,8 @@ function success(pos) {
 		},
 	})
 
+	map.panTo(new L.LatLng(pos.coords.latitude, pos.coords.longitude));
+
 };
 
 navigator.geolocation.getCurrentPosition(success);
@@ -42,6 +44,8 @@ $('#Countries').change(function () {
 		success: function (result) {
 			latitude = result['data'].latlng[0];
 			longitude = result['data'].latlng[1];
+
+			map.panTo(new L.LatLng(latitude, longitude));
 
 			$.ajax({
 				url: "php/OpenCage.php",
