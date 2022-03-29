@@ -116,10 +116,21 @@ $.ajax({
 		});
 		$('#Countries').html(html);
 	}
-})
-
+});
+/*
 var latlngs = [
 	$("polyboard")["coordinates"]
 ];
 
-
+var polyline = L.polyline(latlngs, { color: 'red' }).addTo(map);
+map.fitBounds(polyline.getBounds());
+*/
+$.ajax({
+	url: 'php/CountryList2.php',
+	success: result => {
+		result.data.forEach(polybord => {
+			var polyline = L.polyline('${coordinates}', { color: 'red' }).addTo(map);
+			map.fitBounds(polyline.getBounds());
+		});
+	}
+});
