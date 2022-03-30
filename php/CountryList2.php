@@ -11,26 +11,29 @@
 
 	$polybord = [];
 
-    foreach($_REQUEST['ISO']: $decode['geometry'] as $border_data){
+    if($decode['features']["properties"]["iso_a2"] == $_REQUEST['ISO']){
 
-        array_push(
+        foreach($decode['features'] as $border_data){
 
-            $polybord,
+            array_push(
 
-            array(
+                $polybord,
 
-                "coordinates"=> $border_data["coordinates"],
+                array(
 
-            )
+                    "coordinates"=> $border_data['geometry']["coordinates"],
 
-        );
+                )
+
+            );
+		};
     }
 
 	$output['status']['code'] = "200";
 	$output['status']['name'] = "ok";
 	$output['status']['description'] = "success";
 	$output['status']['returnedIn'] = intval((microtime(true) - $executionStartTime) * 1000) . " ms";
-	$output['data'] = $country;
+	$output['data'] = $decode;
 
 	header('Content-Type: application/json; charset=UTF-8');
 
