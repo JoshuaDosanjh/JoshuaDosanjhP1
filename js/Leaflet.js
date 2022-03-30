@@ -36,19 +36,14 @@ navigator.geolocation.getCurrentPosition(success);
 $('#Countries').change(function () {
 
 	$.ajax({
-		url: "php/CountryList2.php",
+		url: "php/CountryList.php",
 		type: 'POST',
 		dataType: 'json',
 		data: {
 			'ISO': $('#Countries').val()
 		},
-		success: result => {
-			result.data.forEach(polybord => {
-				[{
-					"type": "LineString",
-					"coordinates": '${coordinates}'
-				}]
-			});
+		success: function (result) {
+				L.geoJSON(result['polybord']).addTo(map);
 		},
 		error: function (xhr, status, error) {
 			console.log(xhr.responseText);
