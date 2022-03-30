@@ -11,7 +11,7 @@
 
 	$polybord = [];
 
-    if($country_data['properties']['iso_a2'] == $_REQUEST['ISO']){
+    if($decode['properties']['iso_a2'] == $_REQUEST['ISO']){
 
         foreach($decode['features'] as $border_data){
 
