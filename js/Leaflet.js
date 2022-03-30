@@ -34,6 +34,24 @@ function success(pos) {
 navigator.geolocation.getCurrentPosition(success);
 
 $('#Countries').change(function () {
+
+	$.ajax({
+		url: "php/CountryList2.php",
+		type: 'POST',
+		dataType: 'json',
+		data: {
+			'code': $('#Countries').val()
+		},
+		success: result => {
+			result.data.forEach(polybord => {
+				[{
+					"type": "LineString",
+					"coordinates": ['${coordinates}']
+				}]
+			});
+		}
+	})
+
 	$.ajax({
 		url: "php/RestAPI.php",
 		type: 'POST',
@@ -115,15 +133,5 @@ $.ajax({
 			html += `<option value='${country.iso_a2}'>${country.name}</option>`
 		});
 		$('#Countries').html(html);
-	}
-});
-
-$.ajax({
-	url: 'php/CountryList2.php',
-	success: result => {
-		result.data.forEach(polybord => {
-			var polyline = L.polyline('${coordinates}', { color: 'red' }).addTo(map);
-			map.fitBounds(polyline.getBounds());
-		});
 	}
 });
