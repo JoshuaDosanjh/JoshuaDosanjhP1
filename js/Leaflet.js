@@ -40,7 +40,7 @@ $('#Countries').change(function () {
 		type: 'POST',
 		dataType: 'json',
 		data: {
-			'code': $('#Countries').val()
+			'ISO': $('#Countries').val()
 		},
 		success: result => {
 			result.data.forEach(polybord => {
