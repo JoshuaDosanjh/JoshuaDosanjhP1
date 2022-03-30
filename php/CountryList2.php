@@ -11,23 +11,16 @@
 
 	$polybord = [];
 
-    if($decode['properties']['iso_a2'] == $_REQUEST['ISO']){
+    
 
-        foreach($decode['features'] as $border_data){
+    foreach($decode['features'] as $border_data){
 
-            array_push(
+	    if($decode['properties']['iso_a2'] == $_REQUEST['ISO']){
 
-                $polybord,
+            $polybord = $border_data;
 
-                array(
-
-                    "coordinates"=> $border_data['geometry']["coordinates"],
-
-                )
-
-            );
-		};
-    }
+		}
+    };
 
 	$output['status']['code'] = "200";
 	$output['status']['name'] = "ok";
