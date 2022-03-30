@@ -11,7 +11,7 @@
 
 	$polybord = [];
 
-    foreach($decode['geometry'] as $border_data){
+    foreach($_REQUEST['ISO']: $decode['geometry'] as $border_data){
 
         array_push(
 
