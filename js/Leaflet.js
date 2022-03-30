@@ -46,9 +46,12 @@ $('#Countries').change(function () {
 			result.data.forEach(polybord => {
 				[{
 					"type": "LineString",
-					"coordinates": ['${coordinates}']
+					"coordinates": '${coordinates}'
 				}]
 			});
+		},
+		error: function (xhr, status, error) {
+			console.log(xhr.responseText);
 		}
 	})
 
