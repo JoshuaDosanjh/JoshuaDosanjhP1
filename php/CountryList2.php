@@ -11,7 +11,7 @@
 
 	$polybord = [];
 
-    if($decode['features']["properties"]["iso_a2"] == $_REQUEST['ISO']){
+    if($decode['features']['properties']['iso_a2'] == $_REQUEST['ISO']){
 
         foreach($decode['features'] as $border_data){
 
@@ -33,7 +33,7 @@
 	$output['status']['name'] = "ok";
 	$output['status']['description'] = "success";
 	$output['status']['returnedIn'] = intval((microtime(true) - $executionStartTime) * 1000) . " ms";
-	$output['data'] = $decode;
+	$output['data'] = $polybord;
 
 	header('Content-Type: application/json; charset=UTF-8');
 
