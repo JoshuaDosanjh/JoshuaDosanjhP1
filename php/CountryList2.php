@@ -9,13 +9,13 @@
     
 	$decode = json_decode($result, true);	
 
-	$polybord = [];
+	$polybord;
 
     
 
     foreach($decode['features'] as $border_data){
 
-	    if($decode['properties']['iso_a2'] == $_REQUEST['ISO']){
+	    if($border_data['properties']['iso_a2'] == $_REQUEST['ISO']){
 
             $polybord = $border_data;
 
