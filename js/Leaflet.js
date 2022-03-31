@@ -43,18 +43,7 @@ $('#Countries').change(function () {
 			'ISO': $('#Countries').val()
 		},
 		success: function (result) {
-			var myLines = [{
-				"type": "LineString",
-				"coordinates": "polybord"
-			}];
-			var myStyle = {
-				"color": "#ff7800",
-				"weight": 5,
-				"opacity": 0.65
-			};
-			L.geoJSON(myLines, {
-				style: myStyle
-			}).addTo(map);
+			L.geoJSON(result.data.polybord).addTo(map);
 		},
 		error: function (xhr, status, error) {
 			console.log(xhr.responseText);
