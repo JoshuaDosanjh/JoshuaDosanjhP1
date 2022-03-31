@@ -36,14 +36,25 @@ navigator.geolocation.getCurrentPosition(success);
 $('#Countries').change(function () {
 
 	$.ajax({
-		url: "php/CountryList.php",
+		url: "php/CountryList2.php",
 		type: 'POST',
 		dataType: 'json',
 		data: {
 			'ISO': $('#Countries').val()
 		},
 		success: function (result) {
-				L.geoJSON(result['polybord']).addTo(map);
+			var myLines = [{
+				"type": "LineString",
+				"coordinates": "polybord"
+			}];
+			var myStyle = {
+				"color": "#ff7800",
+				"weight": 5,
+				"opacity": 0.65
+			};
+			L.geoJSON(myLines, {
+				style: myStyle
+			}).addTo(map);
 		},
 		error: function (xhr, status, error) {
 			console.log(xhr.responseText);
