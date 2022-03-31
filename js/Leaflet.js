@@ -43,7 +43,7 @@ $('#Countries').change(function () {
 			'ISO': $('#Countries').val()
 		},
 		success: function (result) {
-			L.geoJSON(result.data.polybord).addTo(map);
+			L.geoJSON(result.data).addTo(map);
 		},
 		error: function (xhr, status, error) {
 			console.log(xhr.responseText);
