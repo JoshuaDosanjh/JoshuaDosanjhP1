@@ -5,24 +5,29 @@
 #Countries {
     position: fixed;
     top: 3%;
-    left: 50%;
+    left: 6rem;
     z-index: 1;
 }
 
 #cI {
     position: fixed;
-    top: 10%;
+    top: 6rem;
     left: 1%;
     z-index: 1;
 }
 
 #fI {
     position: fixed;
-    top: 15%;
+    top: 10rem;
     z-index: 1;
 }
 
 #flagImage {
     height: 100%;
     width: 100%;
+}
+
+#nav {
+    position: absolute;
+    z-index: 1000;
 }
