@@ -111,6 +111,7 @@ $('#Countries').change(function () {
 					$('#Pop').html(result['data']["population"]);
 					$('#Cur').html(result['data'].currency['name']);
 					$('#WL').html(result['data']['wiki_url']);
+					$("#flagImage").attr("src", result['data'].flag['file']);
 				},
 				error: function (xhr, status, error) {
 					console.log(xhr.responseText);
@@ -133,3 +134,4 @@ $.ajax({
 		$('#Countries').html(html);
 	}
 });
+
