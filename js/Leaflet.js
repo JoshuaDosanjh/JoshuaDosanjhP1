@@ -108,8 +108,11 @@ $('#Countries').change(function () {
 					'Ccode': $('#Countries').val()
 				},
 				success: function (result) {
+					$('#CA').html(result['data']["area_size"]);
 					$('#Pop').html(result['data']["population"]);
+					$('#Cap').html(result['data'].capital['name']);
 					$('#Cur').html(result['data'].currency['name']);
+					$('#PC').html(result['data']["phone_code"]);
 					$('#WL').html(result['data']['wiki_url']);
 					$("#flagImage").attr("src", result['data'].flag['file']);
 				},
