@@ -73,7 +73,11 @@ $('#Countries').change(function () {
 				},
 				success: function (result) {
 					if (result.status.name == "ok") {
+						northeast = [result.data.results[0].bounds.northeast['lat'], result.data.results[0].bounds.northeast['lng']];
+						southwest = [result.data.results[0].bounds.southwest['lat'], result.data.results[0].bounds.southwest['lng']];
+
 						$('#Name').html(result.data.results[0].components['country']);
+						map.fitBounds(northeast, southwest);
 					}
 
 				},
