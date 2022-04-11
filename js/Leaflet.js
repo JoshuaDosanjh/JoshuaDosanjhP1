@@ -1,6 +1,6 @@
 // var map = L.map('map').fitWorld()
 
- var map = L.map('map').setView([0, 0], 13);
+ var map = L.map('map').setView([0, 0], 4);
 
 // map.locate({ setView: true, maxZoom: 16 });
 
@@ -8,6 +8,8 @@ var OpenStreetMap_Mapnik = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{
 	maxZoom: 19,
 	attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
 }).addTo(map);
+
+L.easyButton('&iscr;').addTo($('#cI'));
 
 function success(pos) {
 
@@ -61,8 +63,6 @@ $('#Countries').change(function () {
 			latitude = result['data'].latlng[0];
 			longitude = result['data'].latlng[1];
 
-			map.panTo(new L.LatLng(latitude, longitude));
-
 			$.ajax({
 				url: "php/OpenCage.php",
 				type: 'POST',
@@ -73,11 +73,9 @@ $('#Countries').change(function () {
 				},
 				success: function (result) {
 					if (result.status.name == "ok") {
-						northeast = [result.data.results[0].bounds.northeast['lat'], result.data.results[0].bounds.northeast['lng']];
-						southwest = [result.data.results[0].bounds.southwest['lat'], result.data.results[0].bounds.southwest['lng']];
+						map.panTo(new L.LatLng(latitude, longitude));
 
 						$('#Name').html(result.data.results[0].components['country']);
-						map.fitBounds(northeast, southwest);
 					}
 
 				},
