@@ -1,6 +1,6 @@
 // var map = L.map('map').fitWorld()
 
- var map = L.map('map').setView([0, 0], 4);
+ var map = L.map('map').setView([0, 0], 13);
 
 // map.locate({ setView: true, maxZoom: 16 });
 
@@ -9,7 +9,7 @@ var OpenStreetMap_Mapnik = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{
 	attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
 }).addTo(map);
 
-L.easyButton('&iscr;').addTo($('#cI'));
+/*L.easyButton('&iscr;').addTo($('#cI'));*/
 
 function success(pos) {
 
@@ -45,7 +45,9 @@ $('#Countries').change(function () {
 			'ISO': $('#Countries').val()
 		},
 		success: function (result) {
-			L.geoJSON(result.data).addTo(map);
+			L.layerGroup(map.clearLayers());
+			var geoJSON = L.geoJSON(result.data).addTo(map);
+			map.fitBounds(geoJSON.getBounds());
 		},
 		error: function (xhr, status, error) {
 			console.log(xhr.responseText);
@@ -73,7 +75,6 @@ $('#Countries').change(function () {
 				},
 				success: function (result) {
 					if (result.status.name == "ok") {
-						map.panTo(new L.LatLng(latitude, longitude));
 
 						$('#Name').html(result.data.results[0].components['country']);
 					}
@@ -131,12 +132,13 @@ $('#Countries').change(function () {
 
 $.ajax({
 	url: 'php/CountryList.php',
+
 	success: result => {
 		let html = ''
 		result.data.forEach(country => {
 			html += `<option value='${country.iso_a2}'>${country.name}</option>`
 		});
 		$('#Countries').html(html);
-	}
+	},
 });
 
