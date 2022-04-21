@@ -11,6 +11,8 @@ var OpenStreetMap_Mapnik = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{
 
 /*L.easyButton('&iscr;').addTo($('#cI'));*/
 
+let geoJSON;
+
 function success(pos) {
 
 	$.ajax({
@@ -45,8 +47,9 @@ $('#Countries').change(function () {
 			'ISO': $('#Countries').val()
 		},
 		success: function (result) {
-			L.layerGroup(map.clearLayers());
+			if (map.hasLayer(geoJSON)) map.removeLayer(geoJSON)
 			var geoJSON = L.geoJSON(result.data).addTo(map);
+			L.geoJSON(result.data).addTo(map);
 			map.fitBounds(geoJSON.getBounds());
 		},
 		error: function (xhr, status, error) {
@@ -123,6 +126,21 @@ $('#Countries').change(function () {
 					console.log(xhr.responseText);
 				}
 			})
+			/*
+			$.ajax({
+				url: "php/News.php",
+				type: 'POST',
+				dataType: 'json',
+				data: {
+				    'cCode': $('#Countries').val()
+				},
+				success: function (result) {
+					$("#newsLink").attr("src", result['data'].value['url']);
+				},
+				error: function (xhr, status, error) {
+					console.log(xhr.responseText);
+				}
+			})*/
 		},
 		error: function (xhr, status, error) {
 			console.log(xhr.responseText);
