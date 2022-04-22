@@ -48,8 +48,7 @@ $('#Countries').change(function () {
 		},
 		success: function (result) {
 			if (map.hasLayer(geoJSON)) map.removeLayer(geoJSON)
-			var geoJSON = L.geoJSON(result.data).addTo(map);
-			L.geoJSON(result.data).addTo(map);
+			geoJSON = L.geoJSON(result.data).addTo(map);
 			map.fitBounds(geoJSON.getBounds());
 		},
 		error: function (xhr, status, error) {
