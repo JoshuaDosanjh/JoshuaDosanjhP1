@@ -12,6 +12,7 @@
           integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
           crossorigin="">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet-easybutton@2/src/easy-button.css">
+    <link rel="stylesheet" href="leaflet.easybutton/src/easy-button.css">
     <link rel="stylesheet" href="css/leaflet.extra-markers.min.css">
     <link rel="stylesheet" href="css/Bootstrap.css">
     <link rel="stylesheet" href="css/bootstrap.css.map">
@@ -31,6 +32,9 @@
         </button>
         <button type="button" id="fI" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#flagInfo">
             Flag
+        </button>
+        <button type="button" id="nI" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#newsInfo">
+            News
         </button>
     </nav>
 
@@ -91,6 +95,23 @@
         </div>
     </div>
 
+    <div class="modal fade" id="newsInfo" tabindex="-1" aria-labelledby="newsInfoLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="newsInfoLabel">Country News</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <iframe src="" id="newsLink"></iframe>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <div id="map"></div>
 
 
@@ -103,6 +124,7 @@
             integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
             crossorigin=""></script>
     <script src="https://cdn.jsdelivr.net/npm/leaflet-easybutton@2/src/easy-button.js"></script>
+    <script src="leaflet.easybutton/src/easy-button.js"></script>
     <script src="js/leaflet.extra-markers.min.js"></script>
     <script type="application/javascript" src="js/Leaflet.js"></script>
 
