@@ -9,7 +9,7 @@ var OpenStreetMap_Mapnik = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{
 	attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
 }).addTo(map);
 
-/*L.easyButton('&iscr;').addTo($('#cI'));*/
+L.easyButton('&iscr;').addTo($('#cI'));
 
 let geoJSON;
 
