@@ -10,7 +10,8 @@ var OpenStreetMap_Mapnik = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{
 }).addTo(map);
 
 L.easyButton('&iscr;', function (btn, map) {
-	$('#cI').modal("toggle")
+	var cI = new bootstrap.Modal(document.getElementById('#countryInfo'))
+	cI.toggle()
 }).addTo(map);
 
 let geoJSON;
