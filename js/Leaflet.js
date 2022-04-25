@@ -9,7 +9,9 @@ var OpenStreetMap_Mapnik = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{
 	attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
 }).addTo(map);
 
-L.easyButton('&iscr;').addTo($('#cI'));
+L.easyButton('&iscr;', function (btn, map) {
+	$('#cI').modal("toggle")
+}).addTo(map);
 
 let geoJSON;
 
@@ -134,7 +136,7 @@ $('#Countries').change(function () {
 				    'cCode': $('#Countries').val()
 				},
 				success: function (result) {
-					$("#newsLink").attr("src", result['data'].value['url']);
+					$("#newsLink").attr("src", result['data'].value[0]['url']);
 				},
 				error: function (xhr, status, error) {
 					console.log(xhr.responseText);
