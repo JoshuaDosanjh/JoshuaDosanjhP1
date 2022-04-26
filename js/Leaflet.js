@@ -10,7 +10,7 @@ var OpenStreetMap_Mapnik = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{
 }).addTo(map);
 
 L.easyButton('&iscr;', function (btn, map) {
-	var cI = new bootstrap.Modal(document.getElementById('#countryInfo'))
+	var cI = new bootstrap.Modal(document.getElementById('countryInfo'))
 	cI.toggle()
 }).addTo(map);
 
@@ -128,7 +128,7 @@ $('#Countries').change(function () {
 					console.log(xhr.responseText);
 				}
 			})
-			/*
+			
 			$.ajax({
 				url: "php/News.php",
 				type: 'POST',
@@ -142,7 +142,7 @@ $('#Countries').change(function () {
 				error: function (xhr, status, error) {
 					console.log(xhr.responseText);
 				}
-			})*/
+			})
 		},
 		error: function (xhr, status, error) {
 			console.log(xhr.responseText);
