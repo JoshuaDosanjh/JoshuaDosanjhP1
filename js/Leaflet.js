@@ -9,10 +9,20 @@ var OpenStreetMap_Mapnik = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{
 	attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
 }).addTo(map);
 
-L.easyButton('&iscr;', function (btn, map) {
+L.easyButton('&ImaginaryI;', function (btn, map) {
 	var cI = new bootstrap.Modal(document.getElementById('countryInfo'))
 	cI.toggle()
-}).addTo(map);
+}, 'Country Information').addTo(map);
+
+L.easyButton('&EmptySmallSquare;', function (btn, map) {
+	var fI = new bootstrap.Modal(document.getElementById('flagInfo'))
+	fI.toggle()
+}, 'Country Flag').addTo(map);
+
+L.easyButton('&star;', function (btn, map) {
+	var nI = new bootstrap.Modal(document.getElementById('newsInfo'))
+	nI.toggle()
+}, 'Country News').addTo(map);
 
 let geoJSON;
 
@@ -128,7 +138,7 @@ $('#Countries').change(function () {
 					console.log(xhr.responseText);
 				}
 			})
-			/*
+			
 			$.ajax({
 				url: "php/News.php",
 				type: 'POST',
@@ -142,7 +152,7 @@ $('#Countries').change(function () {
 				error: function (xhr, status, error) {
 					console.log(xhr.responseText);
 				}
-			})*/
+			})
 		},
 		error: function (xhr, status, error) {
 			console.log(xhr.responseText);
