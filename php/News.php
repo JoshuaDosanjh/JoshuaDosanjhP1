@@ -8,7 +8,7 @@ ini_set('display_errors', 'On');
 	$curl = curl_init();
 
 curl_setopt_array($curl, [
-	CURLOPT_URL => "https://bing-news-search1.p.rapidapi.com/news/trendingtopics?cc=" . $_REQUEST['cCode'] . "&textFormat=Html&safeSearch=Moderate",
+	CURLOPT_URL => "https://bing-news-search1.p.rapidapi.com/news?cc=" . $_REQUEST['cCode'] . "&textFormat=Html&safeSearch=Moderate",
 	CURLOPT_RETURNTRANSFER => true,
 	CURLOPT_FOLLOWLOCATION => true,
 	CURLOPT_ENCODING => "",
