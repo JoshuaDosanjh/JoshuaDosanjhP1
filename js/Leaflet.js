@@ -147,7 +147,7 @@ $('#Countries').change(function () {
 				    'cCode': $('#Countries').val()
 				},
 				success: function (result) {
-					$("#newsLink").attr("src", result['data'].value[0].image.thumbnail['contentUrl']);
+					$("#newsLink").attr("src", result['data'].articles['urlToImage']);
 				},
 				error: function (xhr, status, error) {
 					console.log(xhr.responseText);
