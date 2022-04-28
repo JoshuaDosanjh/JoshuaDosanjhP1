@@ -9,6 +9,11 @@
     z-index: 1;
 }
 
+#newsInfo {
+    height: 100%;
+    width: 100%;
+}
+
 #cI {
     position: fixed;
     top: 6rem;
