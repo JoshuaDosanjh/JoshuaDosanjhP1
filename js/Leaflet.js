@@ -147,7 +147,20 @@ $('#Countries').change(function () {
 				    'cCode': $('#Countries').val()
 				},
 				success: function (result) {
-					$("#newsLink").attr("src", result['data'].articles[0]['urlToImage']);
+					//$("#newsLink").attr("src", result['data'].articles[0]['urlToImage']);
+
+					let html = ""
+					result.data.articles.forEach(article => {
+						html += `
+                        <div class="article">
+                            <h5>${article.title}</h5>
+                            <div>
+                                <img class"img-fluid" src="${article.urlToImage}" />
+                            </div>
+                        </div>
+                        `
+					})
+					document.querySelector("#newsInfo .modal-content .modal-body").innerHTML = html
 				},
 				error: function (xhr, status, error) {
 					console.log(xhr.responseText);
