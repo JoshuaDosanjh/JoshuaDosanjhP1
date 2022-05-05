@@ -24,6 +24,10 @@ L.easyButton('&star;', function (btn, map) {
 	nI.toggle()
 }, 'Country News').addTo(map);
 
+var markers = L.markerClusterGroup();
+markers.addLayer(L.marker(getRandomLatLng(map)));
+map.addLayer(markers);
+
 let geoJSON;
 
 function success(pos) {
