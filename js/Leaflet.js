@@ -24,11 +24,8 @@ L.easyButton('&star;', function (btn, map) {
 	nI.toggle()
 }, 'Country News').addTo(map);
 
-var markers = L.markerClusterGroup();
-markers.addLayer(L.marker(getRandomLatLng(map)));
-map.addLayer(markers);
-
 let geoJSON;
+let point;
 
 function success(pos) {
 
@@ -84,6 +81,12 @@ $('#Countries').change(function () {
 			latitude = result['data'].latlng[0];
 			longitude = result['data'].latlng[1];
 
+			/*var cord = L.latLng(latitude, longitude);
+
+			var markers = L.markerClusterGroup();
+			markers.addLayer(L.marker(cord));
+			map.addLayer(markers);*/
+
 			$.ajax({
 				url: "php/OpenCage.php",
 				type: 'POST',
@@ -96,6 +99,46 @@ $('#Countries').change(function () {
 					if (result.status.name == "ok") {
 
 						$('#Name').html(result.data.results[0].components['country']);
+
+					}
+
+				},
+				error: function (xhr, status, error) {
+					console.log(xhr.responseText);
+				}
+			})
+
+			$.ajax({
+				url: "php/Poi.php",
+				type: 'POST',
+				dataType: 'json',
+				data: {
+					'LAT': latitude,
+					'LNG': longitude
+				},
+				success: function (result) {
+					if (result.status.name == "ok") {
+
+						var poi = L.ExtraMarkers.icon({
+							shape: 'circle',
+                            markerColor: 'white',
+                            prefix: '',
+                            icon: 'fa-number',
+                            iconColor: '#fff',
+                            iconRotate: 0,
+                            extraClasses: '',
+                            number: '1',
+                            svg: false
+						});
+
+						if (map.hasLayer(point)) map.removeLayer(point)
+						result.data.features.forEach(feature => {
+							point +=
+							    L.marker([${feature.geometry.coordinates[1]}, ${feature.geometry.coordinates[0]}], { icon: poi }).addTo(map)
+								    .bindPopup('${feature.properties.name}')
+								    .openPopup();
+							})
+
 					}
 
 				},
@@ -151,7 +194,6 @@ $('#Countries').change(function () {
 				    'cCode': $('#Countries').val()
 				},
 				success: function (result) {
-					//$("#newsLink").attr("src", result['data'].articles[0]['urlToImage']);
 
 					let html = ""
 					result.data.articles.forEach(article => {
