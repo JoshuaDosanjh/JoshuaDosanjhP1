@@ -201,7 +201,7 @@ $('#Countries').change(function () {
                         <div class="article">
                             <h5>${article.title}</h5>
                             <div>
-                                <img class="img-fluid" src="${article.urlToImage}" />
+                                <img class="img-fluid" src="${article.urlToImage || ''}" />
                             </div>
                         </div>
                         `
