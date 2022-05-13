@@ -8,7 +8,7 @@ ini_set('display_errors', 'On');
 	$curl = curl_init();
 
 curl_setopt_array($curl, [
-	CURLOPT_URL => "https://opentripmap-places-v1.p.rapidapi.com/en/places/radius?radius=10000&lon=" $_REQUEST['LNG'] . "&lat=" $_REQUEST['LAT'],
+	CURLOPT_URL => "https://opentripmap-places-v1.p.rapidapi.com/en/places/radius?radius=100000&lon=" . $_REQUEST['LNG'] . "&lat=" . $_REQUEST['LAT'],
 	CURLOPT_RETURNTRANSFER => true,
 	CURLOPT_FOLLOWLOCATION => true,
 	CURLOPT_ENCODING => "",
