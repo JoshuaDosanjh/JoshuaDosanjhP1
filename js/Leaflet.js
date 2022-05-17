@@ -26,6 +26,7 @@ L.easyButton('&star;', function (btn, map) {
 
 let geoJSON;
 let point;
+let markers;
 
 function success(pos) {
 
@@ -131,13 +132,14 @@ $('#Countries').change(function () {
                             svg: false
 						});
 
-						var markers = L.markerClusterGroup();
+						
 
 						if (map.hasLayer(point)) map.removeLayer(point)
+                        markers = L.markerClusterGroup();
 						result.data.features.forEach(feature => {
-							point +=
-								markers.addLayer(L.marker([feature.geometry.coordinates[1], feature.geometry.coordinates[0]], { icon: poi }).addTo(map)
-								    .bindPopup('${feature.properties.name}')
+							
+								markers.addLayer(L.marker([feature.geometry.coordinates[1], feature.geometry.coordinates[0]], { icon: poi })
+								    .bindPopup(feature.properties.name)
 								    .openPopup());
 							})
 						map.addLayer(markers);
