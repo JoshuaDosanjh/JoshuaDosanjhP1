@@ -131,14 +131,16 @@ $('#Countries').change(function () {
                             svg: false
 						});
 
+						var markers = L.markerClusterGroup();
+
 						if (map.hasLayer(point)) map.removeLayer(point)
 						result.data.features.forEach(feature => {
 							point +=
-							    L.marker([feature.geometry.coordinates[1], feature.geometry.coordinates[0]], { icon: poi }).addTo(map)
+								markers.addLayer(L.marker([feature.geometry.coordinates[1], feature.geometry.coordinates[0]], { icon: poi }).addTo(map)
 								    .bindPopup('${feature.properties.name}')
-								    .openPopup();
+								    .openPopup());
 							})
-
+						map.addLayer(markers);
 					}
 
 				},
