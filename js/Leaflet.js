@@ -114,8 +114,7 @@ $('#Countries').change(function () {
 				type: 'POST',
 				dataType: 'json',
 				data: {
-					'LAT': latitude,
-					'LNG': longitude
+					'Cc': $('#Countries').val()
 				},
 				success: function (result) {
 					if (result.status.name == "ok") {
@@ -136,10 +135,10 @@ $('#Countries').change(function () {
 
 						if (map.hasLayer(point)) map.removeLayer(point)
                         markers = L.markerClusterGroup();
-						result.data.features.forEach(feature => {
+						result.data.results.forEach(result => {
 							
-								markers.addLayer(L.marker([feature.geometry.coordinates[1], feature.geometry.coordinates[0]], { icon: poi })
-								    .bindPopup(feature.properties.name)
+							markers.addLayer(L.marker([result.coordinates.latitude, result.coordinates.longitude], { icon: poi })
+								    .bindPopup(result.name)
 								    .openPopup());
 							})
 						map.addLayer(markers);
