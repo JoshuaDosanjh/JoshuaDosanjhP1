@@ -1,42 +1,30 @@
 <?php
-
-ini_set('display_errors', 'On');
+ 
+	ini_set('display_errors', 'On');
 	error_reporting(E_ALL);
 
 	$executionStartTime = microtime(true);
 
-	$curl = curl_init();
+	$url='https://www.triposo.com/api/20220411/poi.json?countrycode=' . $_REQUEST['Cc'] . '&fields=name,coordinates&language=en&account=HW6XGFS8&token=prhopkqjx942sywkgmiek1nnaj3n5nq3';
 
-curl_setopt_array($curl, [
-	CURLOPT_URL => "https://opentripmap-places-v1.p.rapidapi.com/en/places/radius?radius=100000&lon=" . $_REQUEST['LNG'] . "&lat=" . $_REQUEST['LAT'],
-	CURLOPT_RETURNTRANSFER => true,
-	CURLOPT_FOLLOWLOCATION => true,
-	CURLOPT_ENCODING => "",
-	CURLOPT_MAXREDIRS => 10,
-	CURLOPT_TIMEOUT => 30,
-	CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-	CURLOPT_CUSTOMREQUEST => "GET",
-	CURLOPT_HTTPHEADER => [
-		"X-RapidAPI-Host: opentripmap-places-v1.p.rapidapi.com",
-		"X-RapidAPI-Key: edd27d4269mshd1b61f37c385221p167084jsn1308fdb263a3"
-	],
-]);
+	$ch = curl_init();
+	curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+	curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+	curl_setopt($ch, CURLOPT_URL,$url);
 
-$result = curl_exec($curl);
-$err = curl_error($curl);
+	$result=curl_exec($ch);
 
-curl_close($curl);
+	curl_close($ch);
 
-$decode = json_decode($result,true);	
+	$decode = json_decode($result,true);	
 
 	$output['status']['code'] = "200";
 	$output['status']['name'] = "ok";
 	$output['status']['description'] = "success";
 	$output['status']['returnedIn'] = intval((microtime(true) - $executionStartTime) * 1000) . " ms";
 	$output['data'] = $decode;
+	
+	header('Content-Type: application/json; charset=UTF-8');
 
-header('Content-Type: application/json; charset=UTF-8');
-
-echo json_encode($output);
-
+	echo json_encode($output); 
 ?>
