@@ -65,6 +65,50 @@ $('#Countries').change(function () {
 			if (map.hasLayer(geoJSON)) map.removeLayer(geoJSON)
 			geoJSON = L.geoJSON(result.data).addTo(map);
 			map.fitBounds(geoJSON.getBounds());
+
+			ISO3 = result.data.properties['iso_a3'];
+
+			$.ajax({
+				url: "php/Poi.php",
+				type: 'POST',
+				dataType: 'json',
+				data: {
+					'Cc': ISO3
+				},
+				success: function (result) {
+					if (result.status.name == "ok") {
+
+						var poi = L.ExtraMarkers.icon({
+							shape: 'circle',
+							markerColor: 'white',
+							prefix: '',
+							icon: 'fa-number',
+							iconColor: '#fff',
+							iconRotate: 0,
+							extraClasses: '',
+							number: '1',
+							svg: false
+						});
+
+
+
+						if (map.hasLayer(point)) map.removeLayer(point)
+						markers = L.markerClusterGroup();
+						result.data.results.forEach(result => {
+
+							markers.addLayer(L.marker([result.coordinates.latitude, result.coordinates.longitude], { icon: poi })
+								.bindPopup(result.name)
+								.openPopup());
+						})
+						map.addLayer(markers);
+					}
+
+				},
+				error: function (xhr, status, error) {
+					console.log(xhr.responseText);
+				}
+			})
+
 		},
 		error: function (xhr, status, error) {
 			console.log(xhr.responseText);
@@ -101,47 +145,6 @@ $('#Countries').change(function () {
 
 						$('#Name').html(result.data.results[0].components['country']);
 
-					}
-
-				},
-				error: function (xhr, status, error) {
-					console.log(xhr.responseText);
-				}
-			})
-
-			$.ajax({
-				url: "php/Poi.php",
-				type: 'POST',
-				dataType: 'json',
-				data: {
-					'Cc': $('#Countries').val()
-				},
-				success: function (result) {
-					if (result.status.name == "ok") {
-
-						var poi = L.ExtraMarkers.icon({
-							shape: 'circle',
-                            markerColor: 'white',
-                            prefix: '',
-                            icon: 'fa-number',
-                            iconColor: '#fff',
-                            iconRotate: 0,
-                            extraClasses: '',
-                            number: '1',
-                            svg: false
-						});
-
-						
-
-						if (map.hasLayer(point)) map.removeLayer(point)
-                        markers = L.markerClusterGroup();
-						result.data.results.forEach(result => {
-							
-							markers.addLayer(L.marker([result.coordinates.latitude, result.coordinates.longitude], { icon: poi })
-								    .bindPopup(result.name)
-								    .openPopup());
-							})
-						map.addLayer(markers);
 					}
 
 				},
