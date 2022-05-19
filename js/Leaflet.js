@@ -67,8 +67,8 @@ $('#Countries').change(function () {
 			map.fitBounds(geoJSON.getBounds());
 
 			var LowVal = $('#Countries').val().toLowerCase();
-			if (LowVal == "uk") {
-					LowVal = "gb";
+			if (LowVal == "gb") {
+					LowVal = "uk";
 			};
                 
 			$.ajax({
@@ -128,12 +128,6 @@ $('#Countries').change(function () {
 		success: function (result) {
 			latitude = result['data'].latlng[0];
 			longitude = result['data'].latlng[1];
-
-			/*var cord = L.latLng(latitude, longitude);
-
-			var markers = L.markerClusterGroup();
-			markers.addLayer(L.marker(cord));
-			map.addLayer(markers);*/
 
 			$.ajax({
 				url: "php/OpenCage.php",
