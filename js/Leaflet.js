@@ -66,12 +66,10 @@ $('#Countries').change(function () {
 			geoJSON = L.geoJSON(result.data).addTo(map);
 			map.fitBounds(geoJSON.getBounds());
 
-			var LowVal = function () {
-				if ($('#Countries').val() == "UK") {
-					$('#Countries').val() = "gb";
-				}
-				$('#Countries').val().toLowerCase();
-			}
+			var LowVal = $('#Countries').val().toLowerCase();
+			if (LowVal == "uk") {
+					LowVal = "gb";
+			};
                 
 			$.ajax({
 				url: "php/Poi.php",
