@@ -68,7 +68,7 @@ $('#Countries').change(function () {
 
 			var LowVal = function () {
 				if ($('#Countries').val() == "UK") {
-					return $('#Countries').val() = "gb";
+					$('#Countries').val() = "gb";
 				}
 				$('#Countries').val().toLowerCase();
 			}
