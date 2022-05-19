@@ -66,14 +66,19 @@ $('#Countries').change(function () {
 			geoJSON = L.geoJSON(result.data).addTo(map);
 			map.fitBounds(geoJSON.getBounds());
 
-			ISO3 = result.data.properties['iso_a3'];
-
+			var LowVal = function () {
+				if ($('#Countries').val() == "UK") {
+					return $('#Countries').val() = "gb";
+				}
+				$('#Countries').val().toLowerCase();
+			}
+                
 			$.ajax({
 				url: "php/Poi.php",
 				type: 'POST',
 				dataType: 'json',
 				data: {
-					'Cc': ISO3
+					'Cc': LowVal
 				},
 				success: function (result) {
 					if (result.status.name == "ok") {
