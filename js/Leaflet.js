@@ -27,7 +27,6 @@ L.easyButton('&star;', function (btn, map) {
 let geoJSON;
 let point;
 let markers;
-let changes;
 
 function success(pos) {
 
@@ -41,7 +40,7 @@ function success(pos) {
 		},
 		success: function (result) {
 			if (result.status.name == "ok") {
-				$('#Countries').val(result.data.results[0].components['ISO_3166-1_alpha-2']).trigger('changes');
+				$('#Countries').val(result.data.results[0].components['ISO_3166-1_alpha-2']).trigger('change');
 
 			}
 
@@ -54,7 +53,7 @@ function success(pos) {
 
 navigator.geolocation.getCurrentPosition(success);
 
-changes = $('#Countries').change(function () {
+$('#Countries').change(function () {
 
 	$.ajax({
 		url: "php/CountryList2.php",
