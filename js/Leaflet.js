@@ -27,195 +27,11 @@ L.easyButton('&star;', function (btn, map) {
 let geoJSON;
 let point;
 let markers;
+let changes;
 
-function success(pos) {
 
-	$.ajax({
-		url: "php/OpenCage.php",
-		type: 'POST',
-		dataType: 'json',
-		data: {
-			'LAT': pos.coords.latitude,
-			'LNG': pos.coords.longitude
-		},
-		success: function (result) {
-			if (result.status.name == "ok") {
-				$('#Countries').val(result.data.results[0].components['ISO_3166-1_alpha-2']);
-			}
-			
-		},
-	})
 
-	$.ajax({
-		url: "php/CountryList2.php",
-		type: 'POST',
-		dataType: 'json',
-		data: {
-			'ISO': $('#Countries').val()
-		},
-		success: function (result) {
-			geoJSON = L.geoJSON(result.data).addTo(map);
-			map.fitBounds(geoJSON.getBounds());
-
-			var LowVal = $('#Countries').val().toLowerCase();
-			if (LowVal == "gb") {
-				LowVal = "uk";
-			};
-
-			$.ajax({
-				url: "php/Poi.php",
-				type: 'POST',
-				dataType: 'json',
-				data: {
-					'Cc': LowVal
-				},
-				success: function (result) {
-					if (result.status.name == "ok") {
-
-						var poi = L.ExtraMarkers.icon({
-							shape: 'circle',
-							markerColor: 'white',
-							prefix: '',
-							icon: 'fa-number',
-							iconColor: '#fff',
-							iconRotate: 0,
-							extraClasses: '',
-							number: '1',
-							svg: false
-						});
-
-						markers = L.markerClusterGroup();
-						result.data.results.forEach(result => {
-
-							markers.addLayer(L.marker([result.coordinates.latitude, result.coordinates.longitude], { icon: poi })
-								.bindPopup(result.name)
-								.openPopup());
-						})
-						map.addLayer(markers);
-					}
-
-				},
-				error: function (xhr, status, error) {
-					console.log(xhr.responseText);
-				}
-			})
-
-		},
-		error: function (xhr, status, error) {
-			console.log(xhr.responseText);
-		}
-	})
-
-	$.ajax({
-		url: "php/RestAPI.php",
-		type: 'POST',
-		dataType: 'json',
-		data: {
-			'code': $('#Countries').val()
-		},
-		success: function (result) {
-			latitude = result['data'].latlng[0];
-			longitude = result['data'].latlng[1];
-
-			$.ajax({
-				url: "php/OpenCage.php",
-				type: 'POST',
-				dataType: 'json',
-				data: {
-					'LAT': latitude,
-					'LNG': longitude
-				},
-				success: function (result) {
-					if (result.status.name == "ok") {
-
-						$('#Name').html(result.data.results[0].components['country']);
-
-					}
-
-				},
-				error: function (xhr, status, error) {
-					console.log(xhr.responseText);
-				}
-			})
-
-			$.ajax({
-				url: "php/Weather.php",
-				type: 'POST',
-				dataType: 'json',
-				data: {
-					'LAT': latitude,
-					'LNG': longitude
-				},
-				success: function (result) {
-					if (result.status.name == "ok") {
-						$('#CW').html(result['data'].weather[0]['description']);
-					}
-				},
-				error: function (xhr, status, error) {
-					console.log(xhr.responseText);
-				}
-			})
-
-			$.ajax({
-				url: "php/CountryAPI.php",
-				type: 'POST',
-				dataType: 'json',
-				data: {
-					'Ccode': $('#Countries').val()
-				},
-				success: function (result) {
-					$('#CA').html(result['data']["area_size"]);
-					$('#Pop').html(result['data']["population"]);
-					$('#Cap').html(result['data'].capital['name']);
-					$('#Cur').html(result['data'].currency['name']);
-					$('#PC').html(result['data']["phone_code"]);
-					$('#WL').html(result['data']['wiki_url']);
-					$("#flagImage").attr("src", result['data'].flag['file']);
-				},
-				error: function (xhr, status, error) {
-					console.log(xhr.responseText);
-				}
-			})
-
-			$.ajax({
-				url: "php/News.php",
-				type: 'POST',
-				dataType: 'json',
-				data: {
-					'cCode': $('#Countries').val()
-				},
-				success: function (result) {
-
-					let html = ""
-					result.data.articles.forEach(article => {
-						html += `
-                        <div class="article">
-                            <h5>${article.title}</h5>
-                            <div>
-                                <img class="img-fluid" src="${article.urlToImage || ''}" />
-                            </div>
-                        </div>
-                        `
-					})
-					document.querySelector("#newsInfo .modal-content .modal-body").innerHTML = html
-				},
-				error: function (xhr, status, error) {
-					console.log(xhr.responseText);
-				}
-			})
-		},
-		error: function (xhr, status, error) {
-			console.log(xhr.responseText);
-		}
-	})
-
-	map.panTo(new L.LatLng(pos.coords.latitude, pos.coords.longitude));
-
-};
-
-navigator.geolocation.getCurrentPosition(success);
-
-$('#Countries').change(function () {
+changes = $('#Countries').change(function () {
 
 	$.ajax({
 		url: "php/CountryList2.php",
@@ -397,3 +213,27 @@ $.ajax({
 	},
 });
 
+function success(pos) {
+
+	$.ajax({
+		url: "php/OpenCage.php",
+		type: 'POST',
+		dataType: 'json',
+		data: {
+			'LAT': pos.coords.latitude,
+			'LNG': pos.coords.longitude
+		},
+		success: function (result) {
+			if (result.status.name == "ok") {
+				$('#Countries').val(result.data.results[0].components['ISO_3166-1_alpha-2']);
+                changes.trigger();
+			}
+			
+		},
+	})
+
+    
+
+};
+
+navigator.geolocation.getCurrentPosition(success);
