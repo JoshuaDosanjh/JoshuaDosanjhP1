@@ -19,6 +19,11 @@ L.easyButton('&EmptySmallSquare;', function (btn, map) {
 	fI.toggle()
 }, 'Country Flag').addTo(map);
 
+L.easyButton('&profsurf;', function (btn, map) {
+	var wI = new bootstrap.Modal(document.getElementById('weatherInfo'))
+	wI.toggle()
+}, 'Country Weather').addTo(map);
+
 L.easyButton('&star;', function (btn, map) {
 	var nI = new bootstrap.Modal(document.getElementById('newsInfo'))
 	nI.toggle()
@@ -162,6 +167,16 @@ $('#Countries').change(function () {
 				success: function (result) {
 					if (result.status.name == "ok") {
 						$('#CW').html(result['data'].weather[0]['description']);
+						$('#WI').html(result['data'].weather[0]['main']);
+						$('#WindSpeed').html(result['data'].wind['speed']);
+						$('#WindDeg').html(result['data'].wind['deg']);
+						$('#WindGust').html(result['data'].wind['gust']);
+						$('#Cloud').html(result['data'].clouds['all']);
+						$('#Temp').html(result['data'].main['temp']);
+						$('#MaxTemp').html(result['data'].main['temp_max']);
+						$('#Pressure').html(result['data'].main['pressure']);
+						$('#Humidity').html(result['data'].main['humidity']);
+						$('#MinTemp').html(result['data'].main['temp_min']);
 					}
 				},
 				error: function (xhr, status, error) {
