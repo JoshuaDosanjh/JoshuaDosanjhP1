@@ -101,7 +101,7 @@ $('#Countries').change(function () {
 
 
 
-						if (map.hasLayer(point)) map.removeLayer(point)
+						if (map.hasLayer(markers)) map.removeLayer(markers)
 						markers = L.markerClusterGroup();
 						result.data.results.forEach(result => {
 
