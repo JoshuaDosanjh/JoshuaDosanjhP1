@@ -169,15 +169,12 @@ $('#Countries').change(function () {
 						$("#WI").attr("src", `https://openweathermap.org/img/wn/${result['data'].weather[0]["icon"]}@2x.png`);
 						$('#CW').html(result['data'].weather[0]['description']);
 						$('#WI').html(result['data'].weather[0]['main']);
-						$('#WindSpeed').html(result['data'].wind['speed']);
-						$('#WindDeg').html(result['data'].wind['deg']);
-						$('#WindGust').html(result['data'].wind['gust']);
-						$('#Cloud').html(result['data'].clouds['all']);
-						$('#Temp').html(`${ Math.round(result['data'].main['temp']['metric']) }K`);
-						$('#MaxTemp').html(result['data'].main['temp_max']);
-						$('#Pressure').html(result['data'].main['pressure']);
-						$('#Humidity').html(result['data'].main['humidity']);
-						$('#MinTemp').html(result['data'].main['temp_min']);
+						$('#WindSpeed').html(`${result['data'].wind['speed']}MPS`);
+						$('#WindGust').html(`${result['data'].wind['gust']}MPS`);
+						$('#Cloud').html(`${result['data'].clouds['all']}%`);
+						$('#Temp').html(`${Math.round(result['data'].main['temp'] - 273.15)}<sup>o</sup>C (${Math.round(result['data'].main['temp_min'] - 273.15)}<sup>o</sup>C - ${Math.round(result['data'].main['temp_max'] - 273.15) }<sup>o</sup>C)`);
+						$('#Pressure').html(`${result['data'].main['pressure']}hPa`);
+						$('#Humidity').html(`${result['data'].main['humidity']}%`);
 					}
 				},
 				error: function (xhr, status, error) {
