@@ -48,7 +48,11 @@ echo json_encode($output);
 
 	$url = 'https://newsapi.org/v2/top-headlines?country=' . $_REQUEST['cCode'] . '&apiKey=ac7fbc9d08b44c25a1b9688d70bfbecd';
 	
+	$userAgent = $_SERVER['HTTP_USER_AGENT'];
+	
+
 	$ch = curl_init();
+    curl_setopt($ch, CURLOPT_USERAGENT, $userAgent);
 	curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
 	curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 	curl_setopt($ch, CURLOPT_URL,$url);
