@@ -9,9 +9,7 @@
     z-index: 1;
 }
 
-#img-fluid {
-    display: inline;
-}
+
 
 #cI {
     position: fixed;
@@ -34,4 +32,12 @@
 #nav {
     position: absolute;
     z-index: 1000;
+}
+
+#countryInfoLabel {
+    background-color: red;
+}
+
+#weatherInfoLabel {
+    background-color: cornflowerblue;
 }
