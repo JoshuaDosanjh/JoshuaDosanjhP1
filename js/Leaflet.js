@@ -19,7 +19,7 @@ L.easyButton('&EmptySmallSquare;', function (btn, map) {
 	fI.toggle()
 }, 'Country Flag').addTo(map);
 
-L.easyButton('&profsurf;', function (btn, map) {
+L.easyButton('favicon-16x16', function (btn, map) {
 	var wI = new bootstrap.Modal(document.getElementById('weatherInfo'))
 	wI.toggle()
 }, 'Country Weather').addTo(map);
@@ -106,7 +106,7 @@ $('#Countries').change(function () {
 						result.data.results.forEach(result => {
 
 							markers.addLayer(L.marker([result.coordinates.latitude, result.coordinates.longitude], { icon: poi })
-								.bindPopup(result.name)
+								.bindPopup(result.name, `<img class="img-fluid" src="${result.images}"/>`)
 								.openPopup());
 						})
 						map.addLayer(markers);
