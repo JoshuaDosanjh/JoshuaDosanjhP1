@@ -34,10 +34,18 @@
     z-index: 1000;
 }
 
-#countryInfoLabel {
+#countryHeader {
     background-color: red;
 }
 
-#weatherInfoLabel {
+#weatherHeader {
     background-color: cornflowerblue;
+}
+
+#wI {
+    background-color: cornflowerblue;
+}
+
+#weatherBody {
+    background-image: url('th-3039824414.jpg');
 }
