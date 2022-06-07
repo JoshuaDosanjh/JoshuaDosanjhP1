@@ -19,7 +19,7 @@ L.easyButton('&EmptySmallSquare;', function (btn, map) {
 	fI.toggle()
 }, 'Country Flag').addTo(map);
 
-L.easyButton('favicon-16x16', function (btn, map) {
+L.easyButton('fa-solid fa-cloud;', function (btn, map) {
 	var wI = new bootstrap.Modal(document.getElementById('weatherInfo'))
 	wI.toggle()
 }, 'Country Weather').addTo(map);
