@@ -21,10 +21,12 @@
     <link rel="stylesheet" href="css/Bootstrap.css">
     <link rel="stylesheet" href="css/bootstrap.css.map">
     <link rel="stylesheet" href="css/Leaflet.css">
-    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
-    <link rel="manifest" href="/site.webmanifest">
+    <link rel="apple-touch-icon" sizes="180x180" href="favicon_io_cloud/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon_io_cloud/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon_io_cloud/favicon-16x16.png">
+    <link rel="manifest" href="favicon_io_cloud/site.webmanifest">
+    <script src="https://kit.fontawesome.com/dbde3a4288.js" crossorigin="anonymous"></script>
+    <link href="fontawesome-free-5.15.4-web/fontawesome-free-5.15.4-web/css/all.css" rel="stylesheet">
 
 
 </head>
@@ -40,7 +42,7 @@
     <div class="modal fade" id="countryInfo" tabindex="-1" aria-labelledby="countryInfoLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
-                <div class="modal-header">
+                <div class="modal-header" id="countryHeader">
                     <h5 class="modal-title" id="countryInfoLabel">Country Information</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
@@ -94,11 +96,11 @@
     <div class="modal fade" id="weatherInfo" tabindex="-1" aria-labelledby="weatherInfoLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
-                <div class="modal-header">
+                <div class="modal-header" id="weatherHeader">
                     <h5 class="modal-title" id="weatherInfoLabel">Weather</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <div class="modal-body">
+                <div class="modal-body" id="weatherBody">
                     <h3 id="Temp"></h3>
                     <img src="" id="WI">
                     <p id="CW">
