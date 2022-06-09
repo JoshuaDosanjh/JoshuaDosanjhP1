@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
           integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
           crossorigin="">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet-easybutton@2/src/easy-button.css">
+    <link rel="stylesheet" href="css/easy-button.css">
     <link rel="stylesheet" href="leaflet.easybutton/src/easy-button.css">
     <link rel="stylesheet" href="css/leaflet.extra-markers.min.css">
     <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.4.1/dist//MarkerCluster.css">
@@ -47,7 +47,7 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <h3>Country name</h3>
+                    <h3>Country Name</h3>
                     <p id="Name">
                     </p>
                     <h3>Country Area</h3>
@@ -128,6 +128,40 @@
         </div>
     </div>
 
+    <div class="modal fade" id="covidInfo" tabindex="-1" aria-labelledby="covidInfoLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header" id="covidHeader">
+                    <h5 class="modal-title" id="covidInfoLabel">Coronavirus Stats</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <h3>Total Confirmed Cases</h3>
+                    <p id="TCC">
+                    </p>
+                    <h3>Newly Confirmed Cases</h3>
+                    <p id="NCC">
+                    </p>
+                    <h3>Total Deaths</h3>
+                    <p id="TD">
+                    </p>
+                    <h3>New Deaths</h3>
+                    <p id="ND">
+                    </p>
+                    <h3>Total Recovered Cases</h3>
+                    <p id="TRC">
+                    </p>
+                    <h3>Newly Recovered Cases</h3>
+                    <p id="NRC">
+                    </p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <div class="modal fade" id="newsInfo" tabindex="-1" aria-labelledby="newsInfoLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-scrollable">
             <div class="modal-content">
@@ -156,7 +190,7 @@
     <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
             integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
             crossorigin=""></script>
-    <script src="https://cdn.jsdelivr.net/npm/leaflet-easybutton@2/src/easy-button.js"></script>
+    <script src="js/easy-button.js"></script>
     <script src="leaflet.easybutton/src/easy-button.js"></script>
     <script src="js/leaflet.extra-markers.min.js"></script>
     <script src="https://unpkg.com/leaflet.markercluster@1.4.1/dist/leaflet.markercluster.js"></script>

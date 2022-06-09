@@ -49,5 +49,9 @@
 #weatherBody {
     background-image: url('th-3039824414.jpg');
     background-repeat: no-repeat;
-    background-size: contain;
+    background-size: cover;
+}
+
+#covidHeader {
+    background-color: seagreen;
 }

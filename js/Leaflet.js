@@ -9,22 +9,27 @@ var OpenStreetMap_Mapnik = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{
 	attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
 }).addTo(map);
 
-L.easyButton('&ImaginaryI;', function (btn, map) {
+L.easyButton('<i class="fa-solid fa-info"></i>', function (btn, map) {
 	var cI = new bootstrap.Modal(document.getElementById('countryInfo'))
 	cI.toggle()
 }, 'Country Information').addTo(map);
 
-L.easyButton('&EmptySmallSquare;', function (btn, map) {
+L.easyButton('<i class="fa-solid fa-flag"></i>', function (btn, map) {
 	var fI = new bootstrap.Modal(document.getElementById('flagInfo'))
 	fI.toggle()
 }, 'Country Flag').addTo(map);
 
-L.easyButton('fa-solid fa-cloud;', function (btn, map) {
+L.easyButton('<i class="fa-solid fa-cloud"></i>', function (btn, map) {
 	var wI = new bootstrap.Modal(document.getElementById('weatherInfo'))
 	wI.toggle()
 }, 'Country Weather').addTo(map);
 
-L.easyButton('&star;', function (btn, map) {
+L.easyButton('<i class="fa-solid fa-head-side-mask"></i>', function (btn, map) {
+	var cvI = new bootstrap.Modal(document.getElementById('covidInfo'))
+	cvI.toggle()
+}, 'Coronavirus Stats').addTo(map);
+
+L.easyButton('<i class="fa-solid fa-newspaper"></i>', function (btn, map) {
 	var nI = new bootstrap.Modal(document.getElementById('newsInfo'))
 	nI.toggle()
 }, 'Country News').addTo(map);
@@ -106,7 +111,7 @@ $('#Countries').change(function () {
 						result.data.results.forEach(result => {
 
 							markers.addLayer(L.marker([result.coordinates.latitude, result.coordinates.longitude], { icon: poi })
-								.bindPopup(result.name, `<img class="img-fluid" src="${result.images}"/>`)
+								.bindPopup(result.name)
 								.openPopup());
 						})
 						map.addLayer(markers);
@@ -190,13 +195,41 @@ $('#Countries').change(function () {
 					'Ccode': $('#Countries').val()
 				},
 				success: function (result) {
-					$('#CA').html(result['data']["area_size"]);
-					$('#Pop').html(result['data']["population"]);
+					var CA = result['data']["area_size"]
+					var Pop = result['data']["population"]
+					$('#CA').html(CA.toLocaleString({ minimumFractionDigits: 2 }));
+					$('#Pop').html(Pop.toLocaleString({ minimumFractionDigits: 2 }));
 					$('#Cap').html(result['data'].capital['name']);
 					$('#Cur').html(result['data'].currency['name']);
 					$('#PC').html(result['data']["phone_code"]);
 					$('#WL').html(result['data']['wiki_url']);
 					$("#flagImage").attr("src", result['data'].flag['file']);
+				},
+				error: function (xhr, status, error) {
+					console.log(xhr.responseText);
+				}
+			})
+
+			$.ajax({
+				url: "php/Corona.php",
+				type: 'POST',
+				dataType: 'json',
+				data: {
+					'CC': $('#Countries').val()
+				},
+				success: function (result) {
+					var TCC = result['data'].stats["totalConfirmedCases"]
+					var NCC = result['data'].stats["newlyConfirmedCases"]
+					var TD = result['data'].stats["totalDeaths"]
+					var ND = result['data'].stats["newDeaths"]
+					var TRC = result['data'].stats["totalRecoveredCases"]
+					var NRC = result['data'].stats["newlyRecoveredCases"]
+					$('#TCC').html(TCC.toLocaleString({ minimumFractionDigits: 2 }));
+					$('#NCC').html(NCC.toLocaleString({ minimumFractionDigits: 2 }));
+					$('#TD').html(TD.toLocaleString({ minimumFractionDigits: 2 }));
+					$('#ND').html(ND.toLocaleString({ minimumFractionDigits: 2 }));
+					$('#TRC').html(TRC.toLocaleString({ minimumFractionDigits: 2 }));
+					$("#NRC").html(NRC.toLocaleString({ minimumFractionDigits: 2 }));
 				},
 				error: function (xhr, status, error) {
 					console.log(xhr.responseText);
