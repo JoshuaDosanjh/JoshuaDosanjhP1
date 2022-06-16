@@ -68,7 +68,7 @@ var layerControl = L.control.layers(baseMaps, overlayMaps).addTo(map);*/
 
 	$executionStartTime = microtime(true);
 
-	$url = 'https://api.windy.com/api/webcams/v2/list?show=webcams:location,player/country=' . $_REQUEST['CoCo'] . '&?key=6PxVNSRbXgF17zGEiy0qTP1IVRiKa3GN';
+	$url = 'https://api.windy.com/api/webcams/v2/list/country=' . $_REQUEST['CoCo'] . '?key=6PxVNSRbXgF17zGEiy0qTP1IVRiKa3GN&show=webcams:location,player';
 	
 	$userAgent = $_SERVER['HTTP_USER_AGENT'];
 	
