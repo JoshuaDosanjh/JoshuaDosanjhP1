@@ -38,6 +38,16 @@ let geoJSON;
 let point;
 let markers;
 
+var myVar;
+
+function myFunction() {
+	myVar = setTimeout(showPage, 3000);
+}
+
+function showPage() {
+	document.getElementById("loader").style.display = "none";
+}
+
 function success(pos) {
 
 	$.ajax({
@@ -95,16 +105,26 @@ $('#Countries').change(function () {
 						var poi = L.ExtraMarkers.icon({
 							shape: 'circle',
 							markerColor: 'white',
-							prefix: '',
-							icon: 'fa-number',
+							prefix: 'fas',
+							icon: 'fa-solid fa-mountain-sun',
+							iconColor: 'black',
+							iconRotate: 0,
+							extraClasses: '',
+							number: '',
+							svg: true
+						});
+
+						var city = L.ExtraMarkers.icon({
+							shape: 'star',
+							markerColor: 'black',
+							prefix: 'fas',
+							icon: 'fa-solid fa-city',
 							iconColor: '#fff',
 							iconRotate: 0,
 							extraClasses: '',
-							number: '1',
-							svg: false
+							number: '',
+							svg: true
 						});
-
-
 
 						if (map.hasLayer(markers)) map.removeLayer(markers)
 						markers = L.markerClusterGroup();
@@ -112,6 +132,57 @@ $('#Countries').change(function () {
 
 							markers.addLayer(L.marker([result.coordinates.latitude, result.coordinates.longitude], { icon: poi })
 								.bindPopup(result.name)
+								.openPopup());
+						})
+						map.addLayer(markers);
+					}
+
+				},
+				error: function (xhr, status, error) {
+					console.log(xhr.responseText);
+				}
+			})
+
+			$.ajax({
+				url: "php/City.php",
+				type: 'POST',
+				dataType: 'json',
+				data: {
+					'CoCo': $('#Countries').val()
+				},
+				success: function (result) {
+					if (result.status.name == "ok") {
+
+						var poi = L.ExtraMarkers.icon({
+							shape: 'circle',
+							markerColor: 'white',
+							prefix: 'fas',
+							icon: 'fa-solid fa-mountain-sun',
+							iconColor: 'black',
+							iconRotate: 0,
+							extraClasses: '',
+							number: '',
+							svg: true
+						});
+
+						var city = L.ExtraMarkers.icon({
+							shape: 'star',
+							markerColor: 'black',
+							prefix: 'fas',
+							icon: 'fa-solid fa-city',
+							iconColor: '#fff',
+							iconRotate: 0,
+							extraClasses: '',
+							number: '',
+							svg: true
+						});
+
+						if (map.hasLayer(markers)) map.removeLayer(markers)
+						markers = L.markerClusterGroup();
+						result.data.results.forEach(result => {
+
+							markers.addLayer(L.marker([result.webcam.location.latitude, result.webcam.location.longitude], { icon: city })
+								.bindPopup(result.webcam.location.city, `<iframe src='${result.webcam.player.live.embed}'></iframe>`)
 								.openPopup());
 						})
 						map.addLayer(markers);
