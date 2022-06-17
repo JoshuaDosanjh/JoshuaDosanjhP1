@@ -37,6 +37,7 @@ L.easyButton('<i class="fa-solid fa-newspaper"></i>', function (btn, map) {
 let geoJSON;
 let point;
 let markers;
+let cities;
 
 var myVar;
 
@@ -177,15 +178,15 @@ $('#Countries').change(function () {
 							svg: true
 						});
 
-						if (map.hasLayer(markers)) map.removeLayer(markers)
-						markers = L.markerClusterGroup();
-						result.data.results.forEach(result => {
+						if (map.hasLayer(cities)) map.removeLayer(cities)
+						cities = L.markerClusterGroup();
+						result.data.result.webcams.forEach(result => {
 
-							markers.addLayer(L.marker([result.webcam.location.latitude, result.webcam.location.longitude], { icon: city })
-								.bindPopup(result.webcam.location.city, `<iframe src='${result.webcam.player.live.embed}'></iframe>`)
+							cities.addLayer(L.marker([result.location.latitude, result.location.longitude], { icon: city })
+								.bindPopup(result.location.city, `<p><iframe src='${result.player.live.embed}'></iframe></p>`)
 								.openPopup());
 						})
-						map.addLayer(markers);
+						map.addLayer(cities);
 					}
 
 				},

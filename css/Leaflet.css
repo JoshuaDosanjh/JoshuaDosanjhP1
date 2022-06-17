@@ -106,3 +106,7 @@
 #row2 {
     background-color: ghostwhite;
 }
+
+.modal-body {
+    padding: 1rem;
+}
