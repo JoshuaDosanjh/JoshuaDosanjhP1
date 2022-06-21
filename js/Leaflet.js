@@ -1,13 +1,19 @@
 // var map = L.map('map').fitWorld()
 
- var map = L.map('map').setView([0, 0], 13);
-
-// map.locate({ setView: true, maxZoom: 16 });
+var map = L.map('map', { layer: [OpenStreetMap_Mapnik] }).setView([0, 0], 13);
 
 var OpenStreetMap_Mapnik = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
 	maxZoom: 19,
 	attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
 }).addTo(map);
+
+var mapboxAttribution = 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>';
+
+var mapboxUrl = 'https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw';
+
+var streets = L.tileLayer(mapboxUrl, { id: 'mapbox/streets-v11', tileSize: 512, zoomOffset: -1, attribution: mapboxAttribution });
+
+var satellite = L.tileLayer(mapboxUrl, { id: 'MapID', tileSize: 512, zoomOffset: -1, attribution: mapboxAttribution });
 
 L.easyButton('<i class="fa-solid fa-info"></i>', function (btn, map) {
 	var cI = new bootstrap.Modal(document.getElementById('countryInfo'))
@@ -38,10 +44,20 @@ let geoJSON;
 let point;
 let markers;
 let cities;
+let overlayPoi;
+let overlayCity;
+
+var baseMaps = {
+	"OpenStreetMap": OpenStreetMap_Mapnik,
+	"Streets": streets,
+	"Satellite": satellite
+};
+
+var layerControl = L.control.layers(baseMaps).addTo(map);
 
 var myVar;
 
-function myFunction() {
+function load() {
 	myVar = setTimeout(showPage, 3000);
 }
 
@@ -138,6 +154,12 @@ $('#Countries').change(function () {
 						map.addLayer(markers);
 					}
 
+					overlayPoi = {
+						"Points of Interest": point,
+					};
+
+					layerControl.addOverlay(overlayPoi);
+
 				},
 				error: function (xhr, status, error) {
 					console.log(xhr.responseText);
@@ -183,11 +205,17 @@ $('#Countries').change(function () {
 						result.data.result.webcams.forEach(result => {
 
 							cities.addLayer(L.marker([result.location.latitude, result.location.longitude], { icon: city })
-								.bindPopup(result.location.city, `<p><iframe src='${result.player.live.embed}'></iframe></p>`)
+								.bindPopup(`${result.location.city}<p><iframe src='${result.player.live.embed}'></iframe></p>`)
 								.openPopup());
 						})
 						map.addLayer(cities);
 					}
+
+					overlayCity = {
+						"Cities": cities
+					};
+
+					layerControl.addOverlay(overlayCity);
 
 				},
 				error: function (xhr, status, error) {
