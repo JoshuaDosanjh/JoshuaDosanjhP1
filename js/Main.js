@@ -40,10 +40,10 @@ L.easyButton('<i class="fa-solid fa-newspaper"></i>', function (btn, map) {
 	nI.toggle()
 }, 'Country News').addTo(map);
 
-let geoJSON;
+let geoJSON = L.geoJSON();
 let point;
-let markers;
-let cities;
+let markers = L.markerClusterGroup();
+let cities = L.markerClusterGroup();
 let overlayPoi;
 let overlayCity;
 
@@ -100,9 +100,9 @@ $('#Countries').change(function () {
 			'ISO': $('#Countries').val()
 		},
 		success: function (result) {
-			if (map.hasLayer(L.geoJSON(result.data).addTo(map))) map.removeLayer(L.geoJSON(result.data).addTo(map))
-
-			map.fitBounds(L.geoJSON(result.data).addTo(map).getBounds());
+			if (map.hasLayer(geoJSON)) map.removeLayer(geoJSON)
+			geoJSON = L.geoJSON(result.data).addTo(map);
+			map.fitBounds(geoJSON.getBounds());
 
 			var LowVal = $('#Countries').val().toLowerCase();
 			if (LowVal == "gb") {
@@ -143,22 +143,22 @@ $('#Countries').change(function () {
 							svg: true
 						});
 
-						if (map.hasLayer(L.markerClusterGroup())) map.removeLayer(L.markerClusterGroup())
-						
+						if (map.hasLayer(markers)) map.removeLayer(markers)
+						markers = L.markerClusterGroup();
 						result.data.results.forEach(result => {
 
-							L.markerClusterGroup().addLayer(L.marker([result.coordinates.latitude, result.coordinates.longitude], { icon: poi })
+							markers.addLayer(L.marker([result.coordinates.latitude, result.coordinates.longitude], { icon: poi })
 								.bindPopup(result.name)
 								.openPopup());
 						})
-						map.addLayer(L.markerClusterGroup());
+						map.addLayer(markers);
 					}
 
 					overlayPoi = {
 						"Points of Interest": point,
 					};
 
-					layerControl.addOverlay(L.markerClusterGroup(), "Points of Interest");
+					layerControl.addOverlay(markers, "Points of Interest");
 
 				},
 				error: function (xhr, status, error) {
@@ -220,22 +220,22 @@ $('#Countries').change(function () {
                         })
 
 
-						if (map.hasLayer(L.markerClusterGroup())) map.removeLayer(L.markerClusterGroup())
-
+						if (map.hasLayer(cities)) map.removeLayer(cities)
+						cities = L.markerClusterGroup();
 						result.data.result.webcams.forEach(result => {
 
-							L.markerClusterGroup().addLayer(L.marker([result.location.latitude, result.location.longitude], { icon: city })
+							cities.addLayer(L.marker([result.location.latitude, result.location.longitude], { icon: city })
 								.bindPopup(`${result.location.city}<p>${cam}</p>`)
 								.openPopup());
 						})
-						map.addLayer(L.markerClusterGroup());
+						map.addLayer(cities);
 					}
 
 					overlayCity = {
-						"Cities": L.markerClusterGroup()
+						"Cities": cities
 					};
 
-					layerControl.addOverlay(L.markerClusterGroup(), "Cities");
+					layerControl.addOverlay(cities, "Cities");
 
 				},
 				error: function (xhr, status, error) {
