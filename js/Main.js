@@ -100,9 +100,9 @@ $('#Countries').change(function () {
 			'ISO': $('#Countries').val()
 		},
 		success: function (result) {
-			if (map.hasLayer(geoJSON)) map.removeLayer(geoJSON)
-			geoJSON = L.geoJSON(result.data).addTo(map);
-			map.fitBounds(geoJSON.getBounds());
+			if (map.hasLayer(L.geoJSON(result.data).addTo(map))) map.removeLayer(L.geoJSON(result.data).addTo(map))
+
+			map.fitBounds(L.geoJSON(result.data).addTo(map).getBounds());
 
 			var LowVal = $('#Countries').val().toLowerCase();
 			if (LowVal == "gb") {
@@ -143,22 +143,22 @@ $('#Countries').change(function () {
 							svg: true
 						});
 
-						if (map.hasLayer(markers)) map.removeLayer(markers)
-						markers = L.markerClusterGroup();
+						if (map.hasLayer(L.markerClusterGroup())) map.removeLayer(L.markerClusterGroup())
+						
 						result.data.results.forEach(result => {
 
-							markers.addLayer(L.marker([result.coordinates.latitude, result.coordinates.longitude], { icon: poi })
+							L.markerClusterGroup().addLayer(L.marker([result.coordinates.latitude, result.coordinates.longitude], { icon: poi })
 								.bindPopup(result.name)
 								.openPopup());
 						})
-						map.addLayer(markers);
+						map.addLayer(L.markerClusterGroup());
 					}
 
 					overlayPoi = {
 						"Points of Interest": point,
 					};
 
-					layerControl.addOverlay(markers, "Points of Interest");
+					layerControl.addOverlay(L.markerClusterGroup(), "Points of Interest");
 
 				},
 				error: function (xhr, status, error) {
@@ -220,22 +220,22 @@ $('#Countries').change(function () {
                         })
 
 
-						if (map.hasLayer(cities)) map.removeLayer(cities)
-						cities = L.markerClusterGroup();
+						if (map.hasLayer(L.markerClusterGroup())) map.removeLayer(L.markerClusterGroup())
+
 						result.data.result.webcams.forEach(result => {
 
-							cities.addLayer(L.marker([result.location.latitude, result.location.longitude], { icon: city })
+							L.markerClusterGroup().addLayer(L.marker([result.location.latitude, result.location.longitude], { icon: city })
 								.bindPopup(`${result.location.city}<p>${cam}</p>`)
 								.openPopup());
 						})
-						map.addLayer(cities);
+						map.addLayer(L.markerClusterGroup());
 					}
 
 					overlayCity = {
-						"Cities": cities
+						"Cities": L.markerClusterGroup()
 					};
 
-					layerControl.addOverlay(cities, "Cities");
+					layerControl.addOverlay(L.markerClusterGroup(), "Cities");
 
 				},
 				error: function (xhr, status, error) {
