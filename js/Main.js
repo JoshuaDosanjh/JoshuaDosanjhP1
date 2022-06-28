@@ -207,15 +207,15 @@ $('#Countries').change(function () {
 
 						result.data.result.webcams.forEach(result => {
 
-							if (result.player.live.avaliable = true) {
+							if (result.player.live.available = true) {
 								cam = `<iframe src='${result.player.live.embed}'></iframe>`;
-							} else if (result.player.day.avaliable = true) {
+							} else if (result.player.day.available = true) {
 								cam = `<iframe src='${result.player.day.embed}'></iframe>`;
-							} else if (result.player.month.avaliable = true) {
+							} else if (result.player.month.available = true) {
 								cam = `<iframe src='${result.player.month.embed}'></iframe>`;
-							} else if (result.player.year.avaliable = true) {
+							} else if (result.player.year.available = true) {
 								cam = `<iframe src='${result.player.year.embed}'></iframe>`;
-							} else if (result.player.lifetime.avaliable = true) {
+							} else if (result.player.lifetime.available = true) {
 								cam = `<iframe src='${result.player.lifetime.embed}'></iframe>`;
 							} else {
 								cam = `No Avaliable Webcam`;
