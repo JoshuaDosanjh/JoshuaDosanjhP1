@@ -29,188 +29,169 @@
 
     <div id="loader"></div>
 
-    <nav id="nav">
-        <select id="Countries">
-            <option></option>
-        </select>
-    </nav>
+    <div id="page">
 
-    <div class="modal fade" id="countryInfo" tabindex="-1" aria-labelledby="countryInfoLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-header" id="countryHeader">
-                    <h5 class="modal-title" id="countryInfoLabel">Country Information</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <table class="modal-body">
-                        <tr id="row2">
-                            <td><i class="fa-solid fa-globe"></i></td>
-                            <td><h3>Country Name</h3></td>
-                            <td id="Name" class="data">
-                            </td>
-                        </tr>
-                        <tr id="row1">
-                            <td><i class="fa-solid fa-mountain"></i></td>
-                            <td><h3>Country Area</h3></td>
-                            <td id="CA" class="data">
-                            </td>
-                        </tr>
-                        <tr id="row2">
-                            <td><i class="fa-solid fa-people-group"></i></td>
-                            <td><h3>Population</h3></td>
-                            <td id="Pop" class="data">
-                            </td>
-                        </tr>
-                        <tr id="row1">
-                            <td><i class="fa-solid fa-star"></i></td>
-                            <td><h3>Capital</h3></td>
-                            <td id="Cap" class="data">
-                            </td>
-                        </tr>
-                        <tr id="row2">
-                            <td><i class="fa-solid fa-coins"></i></td>
-                            <td><h3>Currency</h3></td>
-                            <td id="Cur" class="data">
-                            </td>
-                        </tr>
-                        <tr id="row1">
-                            <td><i class="fa-solid fa-phone"></i></td>
-                            <td><h3>Phone Code</h3></td>
-                            <td id="PC" class="data">
-                            </td>
-                        </tr>
-                        <tr id="row2">
-                            <td><i class="fa-brands fa-wikipedia-w"></i></td>
-                            <td><h3>Wikipedia links</h3></td>
-                            <td id="WL" class="data">
-                            </td>
-                        </tr>
-                </table>
-            </div>
-        </div>
-    </div>
-     
-    <div class="modal fade" id="flagInfo" tabindex="-1" aria-labelledby="flagInfoLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="flagInfoLabel">Country Flag</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <img src="" id="flagImage">
+        <nav id="nav">
+            <select class="form-control" id="Countries">
+                <option></option>
+            </select>
+        </nav>
+
+        <div class="modal fade" id="countryInfo" tabindex="-1" aria-labelledby="countryInfoLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header" id="countryHeader">
+                        <h5 class="modal-title" id="countryInfoLabel">Country Information</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <table class="table">
+                            <tr id="row2">
+                                <td><i class="fa-solid fa-globe"></i></td>
+                                <td>Country Name</td>
+                                <td id="Name" class="data">
+                                </td>
+                            </tr>
+                            <tr id="row1">
+                                <td><i class="fa-solid fa-mountain"></i></td>
+                                <td>Country Area</td>
+                                <td id="CA" class="data">
+                                </td>
+                            </tr>
+                            <tr id="row2">
+                                <td><i class="fa-solid fa-people-group"></i></td>
+                                <td>Population</td>
+                                <td id="Pop" class="data">
+                                </td>
+                            </tr>
+                            <tr id="row1">
+                                <td><i class="fa-solid fa-star"></i></td>
+                                <td>Capital</td>
+                                <td id="Cap" class="data">
+                                </td>
+                            </tr>
+                            <tr id="row2">
+                                <td><i class="fa-solid fa-coins"></i></td>
+                                <td>Currency</td>
+                                <td id="Cur" class="data">
+                                </td>
+                            </tr>
+                            <tr id="row1">
+                                <td><i class="fa-solid fa-phone"></i></td>
+                                <td>Phone Code</td>
+                                <td id="PC" class="data">
+                                </td>
+                            </tr>
+                            <tr id="row2">
+                                <td><i class="fa-brands fa-wikipedia-w"></i></td>
+                                <td>Wikipedia links</td>
+                                <td id="WL" class="data">
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
 
-    <div class="modal fade" id="weatherInfo" tabindex="-1" aria-labelledby="weatherInfoLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-header" id="weatherHeader">
-                    <h5 class="modal-title" id="weatherInfoLabel">Weather</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <table class="modal-body" id="weatherBody">
-                    <tr>
-                        <td rowspan="5">
-                            <h3 id="Temp"></h3>
-                            <img src="" id="WI">
-                            <p id="CW">
-                            </p>
-                        </td>
-                    </tr>
-                        <tr>
-                             <td><i class="fa-solid fa-wind"></i></td>
-                             <td id="WindSpeed">
-                             </td>
-                        </tr>
-                        <tr>
-                            <td><i class="fa-solid fa-cloud"></i></td>
-                            <td id="Cloud">
-                            </td>
-                        </tr>
-                        <tr>
-                            <td><i class="fa-solid fa-tornado"></i></td>
-                            <td id="Pressure">
-                            </td>
-                        </tr>
-                        <tr>
-                            <td><i class="fa-solid fa-sun"></i></td>
-                            <td id="Humidity">
-                            </td>
-                        </tr>
-                </table>
-            </div>
-        </div>
-    </div>
-
-    <div class="modal fade" id="covidInfo" tabindex="-1" aria-labelledby="covidInfoLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-header" id="covidHeader">
-                    <h5 class="modal-title" id="covidInfoLabel">Coronavirus Stats</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <table class="modal-body">
-                        <tr id="row1">
-                            <td><i class="fa-solid fa-virus-covid"></i></td>
-                            <td><h3>Total Confirmed Cases</h3></td>
-                            <td id="TCC" class="data">
-                            </td>
-                        </tr>
-                        <tr id="row2">
-                            <td><i class="fa-solid fa-lungs-virus"></i></td>
-                            <td><h3>Newly Confirmed Cases</h3></td>
-                            <td id="NCC" class="data">
-                            </td>
-                        </tr>
-                        <tr id="row1">
-                            <td><i class="fa-solid fa-heart-circle-xmark"></i></td>
-                            <td><h3>Total Deaths</h3></td>
-                            <td id="TD" class="data">
-                            </td>
-                        </tr>
-                        <tr id="row2">
-                            <td><i class="fa-solid fa-heart-circle-exclamation"></i></td>
-                            <td><h3>New Deaths</h3></td>
-                            <td id="ND" class="data">
-                            </td>
-                        </tr>
-                        <tr id="row1">
-                            <td><i class="fa-solid fa-heart-circle-check"></i></td>
-                            <td><h3>Total Recovered Cases</h3></td>
-                            <td id="TRC" class="data">
-                            </td>
-                        </tr>
-                        <tr id="row2">
-                            <td><i class="fa-solid fa-virus-covid-slash"></i></td>
-                            <td><h3>Newly Recovered Cases</h3></td>
-                            <td id="NRC" class="data">
-                            </td>
-                        </tr>
-                </table>
-            </div>
-        </div>
-    </div>
-
-    <div class="modal fade" id="newsInfo" tabindex="-1" aria-labelledby="newsInfoLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-scrollable">
-            <div class="modal-content">
-                <div class="modal-header" id="newsHeader">
-                    <h5 class="modal-title" id="newsInfoLabel">Country News</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <img src="" id="newsLink">
+        <div class="modal fade" id="flagInfo" tabindex="-1" aria-labelledby="flagInfoLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="flagInfoLabel">Country Flag</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <img src="" id="flagImage">
+                    </div>
                 </div>
             </div>
         </div>
+
+        <div class="modal fade" id="weatherInfo" tabindex="-1" aria-labelledby="weatherInfoLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header" id="weatherHeader">
+                        <h5 class="modal-title" id="weatherInfoLabel">Weather</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body" id="weatherBody">
+                        <table class="table" id="Weather">
+                            
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="covidInfo" tabindex="-1" aria-labelledby="covidInfoLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header" id="covidHeader">
+                        <h5 class="modal-title" id="covidInfoLabel">Coronavirus Stats</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <table class="table">
+                            <tr id="row1">
+                                <td><i class="fa-solid fa-virus-covid"></i></td>
+                                <td>Total Confirmed Cases</td>
+                                <td id="TCC" class="data">
+                                </td>
+                            </tr>
+                            <tr id="row2">
+                                <td><i class="fa-solid fa-lungs-virus"></i></td>
+                                <td>Newly Confirmed Cases</td>
+                                <td id="NCC" class="data">
+                                </td>
+                            </tr>
+                            <tr id="row1">
+                                <td><i class="fa-solid fa-heart-circle-xmark"></i></td>
+                                <td>Total Deaths</td>
+                                <td id="TD" class="data">
+                                </td>
+                            </tr>
+                            <tr id="row2">
+                                <td><i class="fa-solid fa-heart-circle-exclamation"></i></td>
+                                <td>New Deaths</td>
+                                <td id="ND" class="data">
+                                </td>
+                            </tr>
+                            <tr id="row1">
+                                <td><i class="fa-solid fa-heart-circle-check"></i></td>
+                                <td>Total Recovered Cases</td>
+                                <td id="TRC" class="data">
+                                </td>
+                            </tr>
+                            <tr id="row2">
+                                <td><i class="fa-solid fa-virus-covid-slash"></i></td>
+                                <td>Newly Recovered Cases</td>
+                                <td id="NRC" class="data">
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="newsInfo" tabindex="-1" aria-labelledby="newsInfoLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-scrollable">
+                <div class="modal-content">
+                    <div class="modal-header" id="newsHeader">
+                        <h5 class="modal-title" id="newsInfoLabel">Country News</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <img src="" id="newsLink">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="map"></div>
+
     </div>
-
-    <div id="map"></div>
-
-
 
 
 
