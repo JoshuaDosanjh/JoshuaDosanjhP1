@@ -55,15 +55,13 @@ var baseMaps = {
 
 var layerControl = L.control.layers(baseMaps).addTo(map);
 
-var myVar;
+var loader;
 
 function load() {
-	myVar = setTimeout(showPage, 3000);
-}
-
-function showPage() {
-	document.getElementById("loader").style.display = "none";
-}
+	loader = document.getElementById("loader");
+	document.body.removeChild(loader);
+	document.getElementById('page').classList.add('ready');
+};
 
 function success(pos) {
 
@@ -101,7 +99,12 @@ $('#Countries').change(function () {
 		},
 		success: function (result) {
 			if (map.hasLayer(geoJSON)) map.removeLayer(geoJSON)
-			geoJSON = L.geoJSON(result.data).addTo(map);
+			geoJSON = L.geoJSON(result.data, {
+				color: 'black',
+				fillColor: 'red',
+				fillOpacity: 0.2,
+				weight: 3
+			}).addTo(map);
 			map.fitBounds(geoJSON.getBounds());
 
 			var LowVal = $('#Countries').val().toLowerCase();
@@ -204,15 +207,15 @@ $('#Countries').change(function () {
 
 						result.data.result.webcams.forEach(result => {
 
-							if (result.player.live.avaliable == "true") {
+							if (result.player.live.avaliable = true) {
 								cam = `<iframe src='${result.player.live.embed}'></iframe>`;
-							} else if (result.player.day.avaliable == "true") {
+							} else if (result.player.day.avaliable = true) {
 								cam = `<iframe src='${result.player.day.embed}'></iframe>`;
-							} else if (result.player.month.avaliable == "true") {
+							} else if (result.player.month.avaliable = true) {
 								cam = `<iframe src='${result.player.month.embed}'></iframe>`;
-							} else if (result.player.year.avaliable == "true") {
+							} else if (result.player.year.avaliable = true) {
 								cam = `<iframe src='${result.player.year.embed}'></iframe>`;
-							} else if (result.player.lifetime.avaliable == "true") {
+							} else if (result.player.lifetime.avaliable = true) {
 								cam = `<iframe src='${result.player.lifetime.embed}'></iframe>`;
 							} else {
 								cam = `No Avaliable Webcam`;
@@ -281,7 +284,7 @@ $('#Countries').change(function () {
 				}
 			})
 
-			$.ajax({
+			/*$.ajax({
 				url: "php/Weather.php",
 				type: 'POST',
 				dataType: 'json',
@@ -291,21 +294,44 @@ $('#Countries').change(function () {
 				},
 				success: function (result) {
 					if (result.status.name == "ok") {
-						$("#WI").attr("src", `https://openweathermap.org/img/wn/${result['data'].weather[0]["icon"]}@2x.png`);
-						$('#CW').html(result['data'].weather[0]['description']);
-						$('#WI').html(result['data'].weather[0]['main']);
-						$('#WindSpeed').html(`${result['data'].wind['speed']}MPS`);
-						$('#WindGust').html(`${result['data'].wind['gust']}MPS`);
-						$('#Cloud').html(`${result['data'].clouds['all']}%`);
-						$('#Temp').html(`${Math.round(result['data'].main['temp'] - 273.15)}<sup>o</sup>C (${Math.round(result['data'].main['temp_min'] - 273.15)}<sup>o</sup>C - ${Math.round(result['data'].main['temp_max'] - 273.15) }<sup>o</sup>C)`);
-						$('#Pressure').html(`${result['data'].main['pressure']}hPa`);
-						$('#Humidity').html(`${result['data'].main['humidity']}%`);
+
+						let table = ""
+						result.data.list.forEach(weather => {
+							table += `
+                            <tr>
+                                <td rowspan="5">
+                                    <div id="WT">Time: ${weather['dt_txt']}</div>
+                                    <p id="WT">${Math.round(weather.main['temp'] - 273.15)}<sup>o</sup>C (${Math.round(weather.main['temp_min'] - 273.15)}<sup>o</sup>C - ${Math.round(weather.main['temp_max'] - 273.15) }<sup>o</sup>C)</p>
+                                    <img src="${weather.weather[0]['main']}">
+                                    <p id="WT">${weather.weather[0]['description']}</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><i class="fa-solid fa-wind"></i></td>
+                                <td id="WT">${weather.wind['speed']}MPS</td>
+                            </tr>
+                            <tr>
+                                <td><i class="fa-solid fa-cloud"></i></td>
+                                <td id="WT">${weather.clouds['all']}%</td>
+                            </tr>
+                            <tr>
+                                <td><i class="fa-solid fa-tornado"></i></td>
+                                <td id="WT">${weather.main['pressure']}hPa</td>
+                            </tr>
+                            <tr>
+                                <td><i class="fa-solid fa-sun"></i></td>
+                                <td id="WT">${weather.main['humidity']}%</td>
+                            </tr>
+                            `
+						})
+						$('#Countries').html(table);
+
 					}
 				},
 				error: function (xhr, status, error) {
 					console.log(xhr.responseText);
 				}
-			})
+			})*/
 
 			$.ajax({
 				url: "php/CountryAPI.php",
@@ -330,7 +356,7 @@ $('#Countries').change(function () {
 				}
 			})
 
-			$.ajax({
+			/*$.ajax({
 				url: "php/Corona.php",
 				type: 'POST',
 				dataType: 'json',
@@ -354,7 +380,7 @@ $('#Countries').change(function () {
 				error: function (xhr, status, error) {
 					console.log(xhr.responseText);
 				}
-			})
+			})*/
 			
 			$.ajax({
 				url: "php/News.php",
