@@ -3,12 +3,9 @@
 }
 
 #Countries {
-    position: fixed;
-    top: 1%;
-    left: 50%;
-    right: 50%;
-    z-index: 1;
-    align-content: center;
+    width: 300px;
+    margin: 0 auto;
+    top: 7px;
 }
 
 
@@ -32,7 +29,10 @@
 }
 
 #nav {
-    position: absolute;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
     z-index: 1000;
 }
 
