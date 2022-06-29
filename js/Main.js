@@ -278,7 +278,7 @@ $('#Countries').change(function () {
 				}
 			})
 
-			/*$.ajax({
+			$.ajax({
 				url: "php/Weather.php",
 				type: 'POST',
 				dataType: 'json',
@@ -325,7 +325,7 @@ $('#Countries').change(function () {
 				error: function (xhr, status, error) {
 					console.log(xhr.responseText);
 				}
-			})*/
+			})
 
 			$.ajax({
 				url: "php/CountryAPI.php",
@@ -350,7 +350,7 @@ $('#Countries').change(function () {
 				}
 			})
 
-			/*$.ajax({
+			$.ajax({
 				url: "php/Corona.php",
 				type: 'POST',
 				dataType: 'json',
@@ -374,7 +374,7 @@ $('#Countries').change(function () {
 				error: function (xhr, status, error) {
 					console.log(xhr.responseText);
 				}
-			})*/
+			})
 			
 			$.ajax({
 				url: "php/News.php",
