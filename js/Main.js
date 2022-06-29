@@ -205,28 +205,22 @@ $('#Countries').change(function () {
 
 						let cam
 
-						result.data.result.webcams.forEach(result => {
-
-							if (result.player.live.available = true) {
-								cam = `<iframe src='${result.player.live.embed}'></iframe>`;
-							} else if (result.player.day.available = true) {
-								cam = `<iframe src='${result.player.day.embed}'></iframe>`;
-							} else if (result.player.month.available = true) {
-								cam = `<iframe src='${result.player.month.embed}'></iframe>`;
-							} else if (result.player.year.available = true) {
-								cam = `<iframe src='${result.player.year.embed}'></iframe>`;
-							} else if (result.player.lifetime.available = true) {
-								cam = `<iframe src='${result.player.lifetime.embed}'></iframe>`;
-							} else {
-								cam = `No Avaliable Webcam`;
-						};
-                        })
-
-
 						if (map.hasLayer(cities)) map.removeLayer(cities)
 						cities = L.markerClusterGroup();
 						result.data.result.webcams.forEach(result => {
-
+                            if (result.player.live.available == true) {
+								cam = `<iframe src='${result.player.live.embed}'></iframe>`;
+							} else if (result.player.day.available == true) {
+								cam = `<iframe src='${result.player.day.embed}'></iframe>`;
+							} else if (result.player.month.available == true) {
+								cam = `<iframe src='${result.player.month.embed}'></iframe>`;
+							} else if (result.player.year.available == true) {
+								cam = `<iframe src='${result.player.year.embed}'></iframe>`;
+							} else if (result.player.lifetime.available == true) {
+								cam = `<iframe src='${result.player.lifetime.embed}'></iframe>`;
+							} else {
+								cam = `No Avaliable Webcam`;
+						    };
 							cities.addLayer(L.marker([result.location.latitude, result.location.longitude], { icon: city })
 								.bindPopup(`${result.location.city}<p>${cam}</p>`)
 								.openPopup());
