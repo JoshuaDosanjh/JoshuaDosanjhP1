@@ -296,7 +296,7 @@ $('#Countries').change(function () {
                                 <td rowspan="5">
                                     <div id="WT">Time: ${weather['dt_txt']}</div>
                                     <p id="WT">${Math.round(weather.main['temp'] - 273.15)}<sup>o</sup>C (${Math.round(weather.main['temp_min'] - 273.15)}<sup>o</sup>C - ${Math.round(weather.main['temp_max'] - 273.15) }<sup>o</sup>C)</p>
-                                    <img src="${weather.weather[0]['main']}">
+                                    <img src="https://openweathermap.org/img/wn/${weather.weather[0]["icon"]}@2x.png">
                                     <p id="WT">${weather.weather[0]['description']}</p>
                                 </td>
                             </tr>
