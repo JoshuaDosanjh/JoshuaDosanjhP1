@@ -318,7 +318,7 @@ $('#Countries').change(function () {
                             </tr>
                             `
 						})
-						$('.Weather').html(table);
+						$('#Weather').html(table);
 
 					}
 				},
